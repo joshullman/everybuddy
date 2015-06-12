@@ -2,19 +2,6 @@ get '/' do
   erb :index
 end
 
-# post '/' do
-# 	@category = Category.new(
-#     name: params[:name],
-#     author_id: params[:author_id]
-#     )
-#   if @category.save
-#     redirect "/search"
-#   else
-#     status 400
-#     :"/"
-#   end
-# end
-
 get '/login' do
 	erb :login
 end
@@ -22,7 +9,7 @@ end
 post '/login' do
 	user = User.find_by(username: params[:username])
 	if user.authenticate(params[:password])
-		session[:user_id] = user.user_id
+		session[:user_id] = user.id
 		redirect '/search'
 	else
 		erb :login
@@ -35,6 +22,18 @@ get '/logout' do
 end
 
 get '/register' do
+	erb :register
+end
+
+post '/register' do
+	@user = User.new(params[:user])
+	if @user.save
+		session[:user_id] = user.id
+		redirect "/search"
+	else
+		status 400
+		erb :register
+	end
 end
 
 get '/search' do
