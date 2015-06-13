@@ -9,11 +9,11 @@ helpers do
 	end
 
 	def logged_in?
-		!session[:user_id].nil?
+		!!current_user
 	end
 
 	def current_user
 		if session[:user_id]
-			User.where(id: session[:user_id]).first
+			@current_user ||= User.where(id: session[:user_id]).first
 		end
 end

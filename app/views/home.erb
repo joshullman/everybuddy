@@ -1,5 +1,6 @@
 <% if logged_in? %>
   <h4>Welcome back <%= current_user.first_name + " " + current_user.last_name %><h4>
+  <p><a href="/profile/:id">Profile</a></p>
   <p><a href="/logout">Logout</a></p>
 <% else %>
   <p><a href="/login">Login</a></p>
@@ -10,7 +11,7 @@
 <h3>Cuz everyone's looking for a buddy</h3>
 
 <h4><p>What kind of buddy are you looking for?</p>
-<form action="/search" method="post">
+<form action="/results" method="post">
   <input type="text" name="name" value="SEARCH VALUE">
   <input type="submit" >
 </form></h4>
