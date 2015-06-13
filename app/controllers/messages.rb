@@ -1,24 +1,24 @@
 #all
-get	"/messages" do
-	
+get	"/profile/:user_id/messages" do
+	erb :messages
 end
 
 #new
-get	"/messages/new" do
+get	"/profile/:user_id/messages/new" do
 	
 end
 
 #create
-post	"/messages" do
+post	"/profile/:user_id/messages" do
 	
 end
 
 #show
-get	"/messages/:id" do
+get	"/profile/:user_id/messages/message_:id" do
 	
 end
 
 #destroy
-delete	"/messages/:id" do
+delete	"/profile/:user_id/messages/message_:id" do
 	
 end

@@ -7,16 +7,16 @@
 #delete buddies
 
 #all
-get	"/buddies" do
-	
+get	"/profile/:user_id/buddies" do
+	erb :buddies
 end
 
 #show
-get	"/profile/:id" do
+get	"/profile/:user_id" do
 	
 end
 
 #destroy
-delete	"/buddies/:id" do
+delete	"/profile/:user_id/buddies/:buddy_id" do
 	
 end
