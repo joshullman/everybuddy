@@ -1,0 +1,13 @@
+<% if logged_in? %>
+  <h4>Welcome back <%= current_user.first_name + " " + current_user.last_name %><h4>
+  <p><a href="/profile">Profile</a></p>
+  <p><a href="/logout">Logout</a></p>
+  <p><a href="/">Search</a></p>
+<% else %>
+  <p><a href="/login">Login</a></p>
+  <p><a href="/register">Register</a></p>
+<% end %>
+
+<% @users.each do |user| %>
+<%= user.first_name %>
+<% end %>
