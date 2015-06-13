@@ -3,9 +3,9 @@ get '/login' do
 end
 
 post '/login' do
-	user = User.find_by(username: params[:username])
-	if user.authenticate(params[:password])
-		login(user)
+	@user = User.find_by(username: params[:username])
+	if @user.password == (params[:password])
+		login(@user)
 		redirect '/'
 	else
 		erb :login

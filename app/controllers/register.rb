@@ -5,9 +5,10 @@ end
 post '/register' do
 	@user = User.new(params[:user])
 	if @user.save
-		login(user)
+		login(@user)
 		redirect "/"
 	else
+    p @user.errors
 		status 400
 		erb :register
 	end
