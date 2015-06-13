@@ -1,10 +1,10 @@
 <% if logged_in? %>
   <h4>Welcome back <%= current_user.first_name + " " + current_user.last_name %><h4>
-  <p><a href="/profile">Profile</a></p>
+  <p><a href="/users/<%= current_user.id %>">Profile</a></p>
   <p><a href="/logout">Logout</a></p>
 <% else %>
   <p><a href="/login">Login</a></p>
-  <p><a href="/register">Register</a></p>
+  <p><a href="/users/new">Register</a></p>
 <% end %>
 
 <h1>EVERYBUDDY</h1>

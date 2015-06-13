@@ -1,8 +1,28 @@
+#new
+get '/users/new' do
+  erb :"users/new"
+end
+
+#create
+post '/users' do
+  @user = User.new(params[:user])
+  if @user.save
+    login(@user)
+    redirect "/"
+  else
+    p @user.errors
+    status 400
+    erb :"users/new"
+  end
+end
+
 #show
-get "/profile" do
-  @user = User.find(session[:user_id])
+get '/users/:id' do
+  p "Am i getting here?"
+  "asdlfkjaslkdjf"
+  @user = User.find_by(id: params[:id])
   if @user
-    erb :"profile/index"
+    erb :"users/show"
   else
     status 404
     redirect '/'
@@ -10,18 +30,18 @@ get "/profile" do
 end
 
 #edit
-get '/profile/:id/edit' do
+get '/users/:id/edit' do
   @user = User.find(session[:user_id])
   if @user
-    erb :"profile/edit"
+    erb :"users/edit"
   else
     status 404
-    "Profile Not Found"
+    "User Not Found"
   end
 end
 
 #update
-put '/profile/:id/' do
+put '/users/:id/' do
 @user = User.find(session[:user_id])
 @user.title = params[:title]
 @user.description = params[:description]
@@ -36,7 +56,7 @@ end
 end
 
 #delete
-delete '/profile/:id' do
+delete '/users/:id' do
 @user = User.find(params[:id])
   if @user
     @user.destroy
@@ -46,3 +66,5 @@ delete '/profile/:id' do
   end
   redirect "/"
 end
+
+
