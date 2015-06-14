@@ -28,14 +28,14 @@ User.create(first_name: "Staunton", last_name: "Sample", email: "karatekid@aol.c
 
 Tag.create(name: "hiking")
 Tag.create(name: "surfing")
-Tag.create(name: "assassination")
+Tag.create(name: "assassin")
 Tag.create(name: "sexy")
 Tag.create(name: "concert")
 Tag.create(name: "study")
 Tag.create(name: "video game")
 Tag.create(name: "mythical creature hunting")
 Tag.create(name: "banana")
-Tag.create(name: "sports")
+Tag.create(name: "wolfjob")
 40.times do
   a = (1 + rand(20))
   b = (1 + rand(10))

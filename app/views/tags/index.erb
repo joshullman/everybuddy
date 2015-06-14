@@ -1,0 +1,8 @@
+<h3>Tags:</h3>
+<ul>
+  <% @tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
+<p><a href="/users/<%= current_user.id %>">Profile</a></p>

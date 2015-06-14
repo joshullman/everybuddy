@@ -1,0 +1,11 @@
+<h3>Edit your Tags:</h3>
+
+<h4><form action="/tags" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="text" name="first_name" value="<%= @user.first_name%>">
+  <input type="text" name="last_name" value="<%= @user.last_name%>" />
+  <input type="text" name="email" value="<%= @user.email %>" />
+  <input type="submit" value="Update Tags">
+</form></h4>
+
+<p><a href="/users/<%= current_user.id %>">Profile</a></p>
