@@ -1,24 +1,25 @@
-# #all
-# get	"/users/:user_id/messages" do
-# 	erb :messages
-# end
+#all
+get	"/users/:user_id/messages" do
+	@messages = Message.all
+	erb :messages
+end
 
-# #new
-# get	"/users/:user_id/messages/new" do
+#new
+get	"/users/:user_id/messages/new" do
 
-# end
+end
 
-# #create
-# post	"/users/:user_id/messages" do
+#create
+post	"/users/:user_id/messages" do
 
-# end
+end
 
-# #show
-# get	"/users/:user_id/messages/message_:id" do
+#show
+get	"/users/:user_id/messages/message_:id" do
 
-# end
+end
 
-# #destroy
-# delete	"/users/:user_id/messages/message_:id" do
+#destroy
+delete	"/users/:user_id/messages/message_:id" do
 
-# end
+end
