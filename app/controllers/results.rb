@@ -3,9 +3,6 @@ get '/results' do
 end
 
 post '/results' do
-  p "*" * 90
-  p params[:tag]
-  p "*" * 90
   @users = []
   User.all.each do |user|
    user.tags.each do |tag|

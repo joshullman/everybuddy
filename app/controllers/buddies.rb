@@ -8,7 +8,7 @@
 
 #all
 get	"/users/:user_id/buddies" do
-  @users = User.where(follwing: true)
+  @users = User.where(following: true)
   p @users
 	erb :"buddies/index"
 end
