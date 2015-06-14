@@ -7,14 +7,25 @@
 	<p><a href="/">Search</a></p>
 <% end %>
 
-<form action="/profile/<%=@user.id%>/edit" method="get">
+<h1><%= @user.username %></h1>
+<p><h3><%= @user.first_name %></h3></p>
+<p><h3><%= @user.last_name %></h3></p>
+<h4>
+  <% tags = [] %>
+  <% @user.tags.each do |tag| %>
+  <% tags << tag.name %>
+  <% end %>
+  <%= tags.join(", ") %>
+</h4>
+
+<!-- <form action="/profile/<%=current_user.id%>/edit" method="get">
   <input type="hidden" name="_method" value="put">
   <input type="submit" value="Edit Profile">
 </form>
-<form action="/profile/<%=@user.id%>" method="post">
+<form action="/profile/<%=current_user.id%>" method="post">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete User">
-</form>
+</form> -->
 
 <!-- #messages
 #buddies

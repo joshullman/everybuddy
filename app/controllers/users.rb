@@ -19,8 +19,10 @@ end
 #show
 get '/users/:id' do
   p "Am i getting here?"
-  "asdlfkjaslkdjf"
   @user = User.find_by(id: params[:id])
+  p '*' * 90
+  p @user
+  p '*' * 90
   if @user
     erb :"users/show"
   else
@@ -41,22 +43,24 @@ get '/users/:id/edit' do
 end
 
 #update
-put '/users/:id/' do
+put '/users/:id' do
+  puts "Why the hell am I here?"
 @user = User.find(session[:user_id])
 @user.title = params[:title]
 @user.description = params[:description]
 @user.price = params[:price]
 @user.author_id = params[:author_id]
-if @user.save
-  redirect "/categories/#{@user.category_id}/articles/#{@user.id}"
-else
-  status 401
-  erb :"articles/edit"
-end
+  if @user.save
+    redirect "/categories/#{@user.category_id}/articles/#{@user.id}"
+  else
+    status 401
+    erb :"articles/edit"
+  end
 end
 
 #delete
 delete '/users/:id' do
+  p "Am I here??"
 @user = User.find(params[:id])
   if @user
     @user.destroy
