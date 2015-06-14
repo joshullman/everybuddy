@@ -1,5 +1,4 @@
 get '/' do
-  puts "HELLOIW"
   erb :home
 end
 

@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 	include BCrypt
 
   has_many :user_tags
-  has_many :tags, through: :user_tags
+  has_many :tags, -> {distinct}, through: :user_tags
   validates :first_name, :last_name, :username, :email, :password, presence: true
   validates :username, uniqueness: true
   validates :email, uniqueness: true
