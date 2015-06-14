@@ -5,6 +5,17 @@ class User < ActiveRecord::Base
 
   has_many :user_tags
   has_many :tags, -> {distinct}, through: :user_tags
+
+  has_many :active_relationships, class_name: "Buddy",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+  has_many :passive_relationships, class_name: "Buddy",
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
+
   validates :first_name, :last_name, :username, :email, :password, presence: true
   validates :username, uniqueness: true
   validates :email, uniqueness: true
