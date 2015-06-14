@@ -6,17 +6,19 @@
 
 #delete buddies
 
-# #all
-# get	"/users/:user_id/buddies" do
-# 	erb :buddies
-# end
+#all
+get	"/users/:user_id/buddies" do
+  @users = User.where(follwing: true)
+  p @users
+	erb :"buddies/index"
+end
 
-# #show
-# get	"/users/:user_id" do
+#show
+get	"/users/:user_id/buddies/:buddy_id" do
 
-# end
+end
 
-# #destroy
-# delete	"/users/:user_id/buddies/:buddy_id" do
+#destroy
+delete	"/users/:user_id/buddies/:buddy_id" do
 
-# end
+end

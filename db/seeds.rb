@@ -40,5 +40,6 @@ Tag.create(name: "wolfjob")
   a = (1 + rand(20))
   b = (1 + rand(10))
   UserTag.create(user_id: a, tag_id: b)
-   # if UserTag.where(user_id: a, tag_id: b)
 end
+
+
