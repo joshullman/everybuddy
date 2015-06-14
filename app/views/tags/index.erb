@@ -1,8 +1,14 @@
-<h3>Tags:</h3>
-<ul>
+<h3>Your Tags:</h3>
   <% @tags.each do |tag| %>
-    <li><%= tag.name %></li>
+    <p>
+      <form action="/results" method="post">
+        <input type="submit" name="tag" value="<%= tag.name %>" />
+      </form>
+      <form action="/users/<%=current_user.id%>/tags/<%= tag.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
+      </form>
+    </p>
   <% end %>
-</ul>
 
 <p><a href="/users/<%= current_user.id %>">Profile</a></p>

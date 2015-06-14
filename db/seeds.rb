@@ -29,7 +29,7 @@ User.create(first_name: "Staunton", last_name: "Sample", email: "karatekid@aol.c
 Tag.create(name: "hiking")
 Tag.create(name: "surfing")
 Tag.create(name: "assassin")
-Tag.create(name: "sexy")
+Tag.create(name: "sexy time")
 Tag.create(name: "concert")
 Tag.create(name: "study")
 Tag.create(name: "video game")
