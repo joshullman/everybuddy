@@ -19,14 +19,18 @@ I'm a musician and back in my home town I found it really difficult to find a bu
 
 As a user:
 
-I want to be able to log in and out
-I want to have a profile and be able to edit and customize said profile
-I want to be able to search for people with common interests
-I want to be able to message buddies
-I want to be able to favorite buddies
-I want to have an awesomeness score that reflects me as a buddy
-I want to be able to see other's awesomeness scores
-I want to be able to endorse buddies that I like
-I want my endorsement to reflect well on me
+* I want to be able to log in and out
+* I want to have a profile and be able to edit and customize said profile
+* I want to be able to search for people with common interests
+* I want to be able to message buddies
+* I want to be able to become buddies with others (friend requests)
+* I want to have an awesomeness score that reflects me as a buddy
+* I want to be able to see other's awesomeness scores
+* I want to be able to endorse buddies that I like
+* I want my endorsement to reflect well on me
+* I want to be able to create a hangout event
+* I want to be able to invite buddies to an event
+* I want to keep track of my events through a calendar
+
 
 ## Features

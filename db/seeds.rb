@@ -24,12 +24,17 @@ User.create(first_name: "Henry", last_name: "Vega", email: "w@aol.com", username
 User.create(first_name: "Karan", last_name: "Aditya", email: "x@aol.com", username: "TheMatador", password: "password")
 User.create(first_name: "Kelvin", last_name: "Gann", email: "y@aol.com", username: "SubZero", password: "password")
 User.create(first_name: "Nicholas", last_name: "Toulouse", email: "z@aol.com", username: "WildCard", password: "password")
+User.create(first_name: "Tanay", last_name: "Arora", email: "tasty@aol.com", username: "Tasty", password: "password")
 User.create(first_name: "Staunton", last_name: "Sample", email: "karatekid@aol.com", username: "KarateKid", password: "password")
 User.create(first_name: "Erica", last_name: "Prenga", email: "thesavior@aol.com", username: "Boomer", password: "password")
+User.create(first_name: "Tom", last_name: "Tom", email: "tom@aol.com", username: "TomTom", password: "password")
+User.create(first_name: "Brick", last_name: "Thornton", email: "brick@aol.com", username: "BrickThorn", password: "password")
+User.create(first_name: "Hunter", last_name: "Chapman", email: "hunter@aol.com", username: "ChampMan", password: "password")
+User.create(first_name: "Jared", last_name: "Grippe", email: "jumpy@aol.com", username: "FrogPrince", password: "password")
 
 Tag.create(name: "hiking")
 Tag.create(name: "surfing")
-Tag.create(name: "assassin")
+Tag.create(name: "murder")
 Tag.create(name: "sexy time")
 Tag.create(name: "concert")
 Tag.create(name: "study")
@@ -37,9 +42,15 @@ Tag.create(name: "video game")
 Tag.create(name: "mythical creature hunting")
 Tag.create(name: "banana")
 Tag.create(name: "wolfjob")
-60.times do
-  a = (1 + rand(28))
-  b = (1 + rand(10))
+Tag.create(name: "rock climbing")
+Tag.create(name: "parachuting")
+Tag.create(name: "jogging")
+Tag.create(name: "burrito")
+Tag.create(name: "yoga")
+
+75.times do
+  a = (1 + rand(33))
+  b = (1 + rand(15))
   UserTag.create(user_id: a, tag_id: b)
 end
 
