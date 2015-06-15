@@ -6,14 +6,18 @@ class User < ActiveRecord::Base
   has_many :user_tags
   has_many :tags, -> {distinct}, through: :user_tags
 
-  has_many :active_relationships, class_name: "Message",
-                                  foreign_key: "messager_id",
-                                  dependent: :destroy
-  has_many :passive_relationships, class_name: "Message",
-                                   foreign_key: "messaged_id",
-                                   dependent: :destroy
-  has_many :messaging, through: :active_relationships, source: :messaged
-  has_many :messagers, through: :passive_relationships, source: :messager
+  # has_many :user_one_conversations, class_name: "Conversation", foreign_key: "user_two_id"
+  # has_many :conversations, through: :user_one_conversations, source: :user_one
+  # has_many :user_two_conversations, class_name: "Conversation", foreign_key: "user_one_id"
+  # has_many :conversations, through: :user_two_conversations, source: :user_two
+
+  # has_many :user_conversations,
+  # has_many :user_conversations,
+  has_many :conversations, class_name: "Conversation", source: :user_one, foreign_key: "user_two_id"
+  has_many :conversations, class_name: "Conversation", source: :user_two, foreign_key: "user_one_id"
+
+  has_many :messages
+  has_many :messages, through: :conversations
 
   has_many :buddies
   has_many :buddys, :through => :buddies

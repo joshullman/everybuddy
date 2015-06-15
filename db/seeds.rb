@@ -25,6 +25,7 @@ User.create(first_name: "Karan", last_name: "Aditya", email: "x@aol.com", userna
 User.create(first_name: "Kelvin", last_name: "Gann", email: "y@aol.com", username: "SubZero", password: "password")
 User.create(first_name: "Nicholas", last_name: "Toulouse", email: "z@aol.com", username: "WildCard", password: "password")
 User.create(first_name: "Staunton", last_name: "Sample", email: "karatekid@aol.com", username: "KarateKid", password: "password")
+User.create(first_name: "Erica", last_name: "Prenga", email: "thesavior@aol.com", username: "Boomer", password: "password")
 
 Tag.create(name: "hiking")
 Tag.create(name: "surfing")
@@ -36,7 +37,7 @@ Tag.create(name: "video game")
 Tag.create(name: "mythical creature hunting")
 Tag.create(name: "banana")
 Tag.create(name: "wolfjob")
-40.times do
+50.times do
   a = (1 + rand(20))
   b = (1 + rand(10))
   UserTag.create(user_id: a, tag_id: b)
