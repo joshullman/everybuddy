@@ -38,7 +38,7 @@ Tag.create(name: "mythical creature hunting")
 Tag.create(name: "banana")
 Tag.create(name: "wolfjob")
 60.times do
-  a = (1 + rand(20))
+  a = (1 + rand(28))
   b = (1 + rand(10))
   UserTag.create(user_id: a, tag_id: b)
 end
