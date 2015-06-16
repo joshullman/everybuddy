@@ -47,10 +47,16 @@ Tag.create(name: "parachuting")
 Tag.create(name: "jogging")
 Tag.create(name: "burrito")
 Tag.create(name: "yoga")
+Tag.create(name: "jam sesh")
+Tag.create(name: "purgery")
+Tag.create(name: "road trip")
+Tag.create(name: "treason")
+Tag.create(name: "shopping")
+
 
 75.times do
   a = (1 + rand(33))
-  b = (1 + rand(15))
+  b = (1 + rand(20))
   UserTag.create(user_id: a, tag_id: b)
 end
 
