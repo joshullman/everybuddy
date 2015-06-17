@@ -6,18 +6,8 @@ class User < ActiveRecord::Base
   has_many :user_tags
   has_many :tags, -> {distinct}, through: :user_tags
 
-  # has_many :user_one_conversations, class_name: "Conversation", foreign_key: "user_two_id"
-  # has_many :conversations, through: :user_one_conversations, source: :user_one
-  # has_many :user_two_conversations, class_name: "Conversation", foreign_key: "user_one_id"
-  # has_many :conversations, through: :user_two_conversations, source: :user_two
-
-  # has_many :user_conversations,
-  # has_many :user_conversations,
   has_many :sent_convos, class_name: "Conversation", source: :user_one, foreign_key: "sender"
   has_many :received_convos, class_name: "Conversation", source: :user_two, foreign_key: "receiver"
-  # has_many :conversations, through: :sent_convos, through: :received_convos
-
-  # has_many :conversations, class_name: "Conversation"
 
   def conversations(id)
     Conversation.where("conversations.sender = #{id} OR conversations.receiver = #{id}").order(created_at: :desc)
