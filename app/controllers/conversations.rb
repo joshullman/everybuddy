@@ -1,10 +1,6 @@
 #all
 get	"/users/:user_id/conversations" do
-	@conversations = []
-	@conversations << current_user.sent_convos
-	@conversations << current_user.received_convos
-	@conversations.flatten
-	@conversations.order(created_at: :desc)
+	@conversations = current_user.conversations(current_user.id)
 	erb :"conversations/index"
 end
 
