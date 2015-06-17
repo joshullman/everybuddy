@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
 
   # has_many :conversations, class_name: "Conversation"
 
+  def conversations(id)
+    Conversation.where("conversations.sender = #{id} OR conversations.receiver = #{id}").order(created_at: :desc)
+  end
+
   has_many :messages
 
   has_many :buddies
