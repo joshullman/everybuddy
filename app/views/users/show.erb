@@ -30,6 +30,9 @@
 </form>
 <p><a href="/users/<%=current_user.id%>/tags">Show Tags</a></p>
 <p><a href="/users/<%=current_user.id%>/tags/new">Add Tags</a></p>
+<p><a href="/users/<%=current_user.id%>/conversations">Show Conversations</a></p>
+<% elsif logged_in? && @user.id != current_user.id %>
+  <p><a href="/users/<%=@user.id%>/conversations/new">New Message</a></p>
 <% end %>
 
 <!-- #messages

@@ -1,13 +1,9 @@
 class CreateBuddies < ActiveRecord::Migration
   def change
     create_table :buddies do |t|
-      t.integer :follower_id
-      t.integer :followed_id
-
-      t.timestamps null: false
+      t.string :user_id
+      t.string :buddy_id
+      t.boolean :authorized, :default => false
     end
-    add_index :buddies, :follower_id
-    add_index :buddies, :followed_id
-    add_index :buddies, [:follower_id, :followed_id ], unique: true
   end
 end
