@@ -53,6 +53,18 @@ Tag.create(name: "road trip")
 Tag.create(name: "treason")
 Tag.create(name: "shopping")
 
+Conversation.create(sender: 1, receiver: 2, title: "Hey")
+Conversation.create(sender: 1, receiver: 33, title: "Hey")
+Conversation.create(sender: 5, receiver: 18, title: "Hey")
+Message.create(conversation_id: 1, user_id: 1, content: "What's up?")
+Message.create(conversation_id: 1, user_id: 2, content: "Nothing much, you?")
+Message.create(conversation_id: 1, user_id: 1, content: "Just watching Jared lecture")
+Message.create(conversation_id: 1, user_id: 1, content: "Frogs4lyfe")
+Message.create(conversation_id: 2, user_id: 1, content: "What's up?")
+Message.create(conversation_id: 2, user_id: 33, content: "Nothing much, you?")
+Message.create(conversation_id: 2, user_id: 1, content: "Just watching Jared lecture")
+Message.create(conversation_id: 2, user_id: 1, content: "Frogs4lyfe")
+Message.create(conversation_id: 3, user_id: 5, content: "Frogs4lyfe")
 
 75.times do
   a = (1 + rand(33))
