@@ -17,13 +17,18 @@ class User < ActiveRecord::Base
 
   has_many :buddies
   has_many :buddys, :through => :buddies
+  has_many :inverse_buddies, :class_name => "Buddy", :foreign_key => "buddy_id"
+  has_many :inverse_buddys, :through => :inverse_buddies, :source => :user
+
+  # has_many :buddies, class_name: "Buddy", source: :user, foreign_key: "user_id"
+  # has_many :
+  
   # has_many :authorized_friends, :through => :friendships, :source => :friend, :conditions => [ "authorized = ?", true ]
   # has_many :unauthorized_friends, :through => :friendships, :source => :friend, :conditions => [ "authorized = ?", false ]
 
   validates :first_name, :last_name, :username, :email, :password, presence: true
   validates :username, uniqueness: true
   validates :email, uniqueness: true
-
 
   def password
     @password ||= Password.new(password_hash)

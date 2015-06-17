@@ -3,7 +3,7 @@ class CreateBuddies < ActiveRecord::Migration
     create_table :buddies do |t|
       t.string :user_id
       t.string :buddy_id
-      t.boolean :authorized, :default => false
+      t.boolean :accepted, :default => false
     end
   end
 end
