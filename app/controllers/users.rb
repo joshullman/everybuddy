@@ -40,11 +40,7 @@ end
 
 #update
 put '/users/:id' do
-@user = User.find(session[:user_id])
-@user.title = params[:title]
-@user.description = params[:description]
-@user.price = params[:price]
-@user.author_id = params[:author_id]
+  @user = User.find(session[:user_id])
   if @user.save
     redirect "/categories/#{@user.category_id}/articles/#{@user.id}"
   else

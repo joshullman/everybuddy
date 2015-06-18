@@ -1,21 +1,14 @@
-<h3>Your Buddies:</h3>
-  <% @tags.each do |tag| %>
+<p><a href="/users/<%= current_user.id %>">Profile</a></p>
+<h3><%= @user.username %>'s Buddies:</h3>
+  <% @buddies.each do |buddy| %>
     <p>
-      <form action="/users/<%= user.id %>" method="post">
-        <input type="submit" name="username" value="<%= user.username %>" />
-      </form>
-      <% if current_user.following? %>
-        <form action="/users/<%=current_user.id%>/buddies/<%= buddy.id %>" method="post">
+      <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
+      <% if current_user %>
+        <form action="/users/<%=current_user.id%>/buddies" method="post">
           <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="Unfollow">
-        </form>
-      <% else %>
-        <form action="/users/<%=current_user.id%>/buddies/<%= buddy.id %>" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="Unfollow">
+          <input type="submit" value="Delete from Friends">
         </form>
       <% end %>
     </p>
   <% end %>
 
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>

@@ -20,19 +20,29 @@
 </h4>
 
 <% if logged_in? && @user.id == current_user.id %>
-<form action="/users/<%=current_user.id%>/edit" method="get">
-  <input type="hidden" name="_method" value="put">
-  <input type="submit" value="Edit Profile">
-</form>
-<form action="/users/<%=current_user.id%>" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete User">
-</form>
-<p><a href="/users/<%=current_user.id%>/tags">Show Tags</a></p>
-<p><a href="/users/<%=current_user.id%>/tags/new">Add Tags</a></p>
-<p><a href="/users/<%=current_user.id%>/conversations">Show Conversations</a></p>
+  <form action="/users/<%=current_user.id%>/edit" method="get">
+    <input type="hidden" name="_method" value="put">
+    <input type="submit" value="Edit Profile">
+  </form>
+  <form action="/users/<%=current_user.id%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete User">
+  </form>
+  <p><a href="/users/<%=current_user.id%>/tags">Show Tags</a></p>
+  <p><a href="/users/<%=current_user.id%>/tags/new">Add Tags</a></p>
+  <p><a href="/users/<%=current_user.id%>/conversations">Show Conversations</a></p>
+  <p><a href="/users/<%=current_user.id%>/buddies">Show Buddies</a></p>
 <% elsif logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%=@user.id%>/conversations/new">New Message</a></p>
+<% end %>
+
+<% if logged_in? && @user.id != current_user.id && !current_user.buddys.include?(@user)%>
+  <form action="/users/<%=@user.id%>/buddies" method="post">
+    <input type="submit" value="Add Friend">
+  </form>
+<% elsif logged_in? && @user.id == current_user.id %>
+<% else %>
+    <h3>Already friends!</h3>
 <% end %>
 
 <!-- #messages
