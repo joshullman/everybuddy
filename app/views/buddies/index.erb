@@ -4,7 +4,7 @@
     <p>
       <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
       <% if current_user %>
-        <form action="/users/<%=current_user.id%>/buddies/<%= buddy.id %>" method="post">
+        <form action="/users/<%=current_user.id%>/buddies/<%= buddy.id %>/delete" method="post">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" value="Delete from Buddies">
         </form>

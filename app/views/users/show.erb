@@ -47,7 +47,7 @@
 <% elsif logged_in? && @user.id == current_user.id %>
 <% else %>
   <h3>Already friends!</h3>
-  <form action="/users/<%=@user.id%>/buddies" method="post">
+  <form action="/users/<%=current_user.id%>/buddies/<%=@user.id%>" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Remove Buddy">
   </form>
