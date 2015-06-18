@@ -15,10 +15,25 @@ class User < ActiveRecord::Base
 
   has_many :messages
 
-  has_many :buddies
-  has_many :buddys, :through => :buddies
+  has_many :buddy_relationships
+  has_many :buddies, :through => :buddy_relationships
   has_many :inverse_buddies, :class_name => "Buddy", :foreign_key => "buddy_id"
   has_many :inverse_buddys, :through => :inverse_buddies, :source => :user
+
+  def accepted_buddies
+    id = self.id
+    BuddyRelationship.where("(buddy_relationships.user_id = #{id} OR buddy_relationships.buddy_id = #{id}) AND buddy_relationships.accepted = true")
+  end
+
+  def pending_buddies
+    id = self.id
+    BuddyRelationship.where("buddy_relationships.user_id = #{id} AND buddy_relationships.accepted = false")
+  end
+
+  def requesting_buddies
+    id = self.id
+    BuddyRelationship.where("buddy_relationships.buddy_id = #{id} AND buddy_relationships.accepted = false")
+  end
 
   # def buddies(id)
   #   Buddy.where("buddies.user_id = #{id} OR buddies.buddy_id = #{id}").order(created_at: :desc)

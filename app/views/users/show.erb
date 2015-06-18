@@ -31,7 +31,9 @@
   <p><a href="/users/<%=current_user.id%>/tags">Show Tags</a></p>
   <p><a href="/users/<%=current_user.id%>/tags/new">Add Tags</a></p>
   <p><a href="/users/<%=current_user.id%>/conversations">Show Conversations</a></p>
-  <p><a href="/users/<%=current_user.id%>/buddies">Show Buddies</a></p>
+  <p><a href="/users/<%=current_user.id%>/buddies">Your Buddies</a></p>
+  <p><a href="/users/<%=current_user.id%>/buddies/pending">Pending Buddies</a></p>
+  <p><a href="/users/<%=current_user.id%>/buddies/requests">Buddy Requests</a></p>
 <% elsif logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%=@user.id%>/conversations/new">New Message</a></p>
 <% end %>

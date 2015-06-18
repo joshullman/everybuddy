@@ -1,16 +1,25 @@
-#show all buddies
-
-#go to buddy's profile
-
-#edit buddies
-
-#delete buddies
-
-#all
+#all accepted
 get	"/users/:user_id/buddies" do
   @user = User.find(params[:user_id])
-  @buddies = @user.buddys
-	erb :"buddies/index"
+  if @buddies = @user.accepted_buddies
+	 erb :"buddies/index"
+  else
+    "You have no buddies!"
+  end
+end
+
+#pending
+get "/users/:user_id/buddies/pending" do
+  @user = User.find(params[:user_id])
+  @buddies = @user.pending_buddies
+  erb :"buddies/index"
+end
+
+#requests
+get "/users/:user_id/buddies/requests" do
+  @user = User.find(params[:user_id])
+  @buddies = @user.requesting_buddies
+  erb :"buddies/index"
 end
 
 # #show
@@ -32,7 +41,7 @@ end
 
 # #destroy
 delete	"/users/:user_id/buddies" do
-  @buddy = current_user.buddys.find(params[:user_id])
+  @buddy = current_user.buddies.find_by(user_id: params[:user_id]) || current_user.buddies.find_by(buddy_id: params[:user_id])
   @buddy.destroy
   flash[:notice] = "Removed Buddy"
   redirect "/users/:user_id/buddies"

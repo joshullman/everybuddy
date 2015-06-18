@@ -6,7 +6,7 @@
       <% if current_user %>
         <form action="/users/<%=current_user.id%>/buddies" method="post">
           <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="Delete from Friends">
+          <input type="submit" value="Delete from Buddies">
         </form>
       <% end %>
     </p>
