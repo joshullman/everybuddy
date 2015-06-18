@@ -25,7 +25,7 @@ post "/users/:user_id/buddies/:buddy_id/new" do
                BuddyRelationship.where(user_id: current_user.id, buddy_id: params[:buddy_id]).first
   @buddy_rel[:accepted] = true
   if @buddy_rel.save
-    redirect "/users/#{current_user.id}/buddies"
+    redirect "/users/#{current_user.id}/buddies/requests"
   else
     "I GOT AN ERROR D:"
   end
