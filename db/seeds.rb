@@ -78,10 +78,10 @@ Message.create(conversation_id: 5, user_id: 1, content: "b^_^d")
   UserTag.create(user_id: a, tag_id: b)
 end
 
-50.times do
+60.times do
 	a = (1 + rand(33))
 	b = (1 + rand(33))
-	if a != b
+	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first
 		BuddyRelationship.create(user_id: a, buddy_id: b, accepted: true)
 	end
 end
@@ -89,7 +89,7 @@ end
 30.times do
 	a = (1 + rand(33))
 	b = (1 + rand(33))
-	if a != b
+	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first
 		BuddyRelationship.create(user_id: a, buddy_id: b)
 	end
 end
