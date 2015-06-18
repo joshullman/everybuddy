@@ -1,0 +1,7 @@
+<p><a href="/users/<%= current_user.id %>">Profile</a></p>
+<h3><%= @user.username %>'s Pending Buddies:</h3>
+  <% @buddies.each do |buddy| %>
+    <p>
+      <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
+    </p>
+  <% end %>

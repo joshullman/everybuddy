@@ -1,48 +1,47 @@
 #all accepted
 get	"/users/:user_id/buddies" do
   @user = User.find(params[:user_id])
-  if @buddies = @user.accepted_buddies
-	 erb :"buddies/index"
-  else
-    "You have no buddies!"
-  end
+  @buddies = @user.accepted_buddies
+	erb :"buddies/index"
 end
 
 #pending
 get "/users/:user_id/buddies/pending" do
   @user = User.find(params[:user_id])
   @buddies = @user.pending_buddies
-  erb :"buddies/index"
+  erb :"buddies/pending"
 end
 
 #requests
 get "/users/:user_id/buddies/requests" do
   @user = User.find(params[:user_id])
-  @buddies = @user.requesting_buddies
-  erb :"buddies/index"
+  @buddies = @user.buddy_requests
+  erb :"buddies/requests"
 end
 
-# #show
-# get	"/users/:user_id/buddies/:buddy_id" do
-
-# end
-
-#create
-post "/users/:user_id/buddies" do
-  @buddy = current_user.buddies.new(user_id: current_user.id, buddy_id: params[:user_id])
-  if @buddy.save
-    # flash[:notice] = "Added friend."
-    redirect "/users/#{params[:user_id]}"
+# create/accept new friend
+post "/users/:user_id/buddies/:buddy_id/new" do
+  @buddy_rel = BuddyRelationship.where(user_id: params[:buddy_id], buddy_id: current_user.id).first || 
+               BuddyRelationship.where(user_id: current_user.id, buddy_id: params[:buddy_id]).first
+  @buddy_rel[:accepted] = true
+  if @buddy_rel.save
+    redirect "/users/#{current_user.id}/buddies"
   else
-    # flash[:error] = "Unable to add friend."
-    redirect "/users/#{params[:user_id]}"
+    "I GOT AN ERROR D:"
   end
 end
 
+#create/invite new friend
+post "/users/:user_id/buddies" do
+  BuddyRelationship.create(user_id: current_user.id, buddy_id: params[:user_id])
+  redirect "/users/#{params[:user_id]}"
+end
+
 # #destroy
-delete	"/users/:user_id/buddies" do
-  @buddy = current_user.buddies.find_by(user_id: params[:user_id]) || current_user.buddies.find_by(buddy_id: params[:user_id])
+delete	"/users/:user_id/buddies/:buddy_id" do
+  @buddy = BuddyRelationship.where(user_id: params[:buddy_id], buddy_id: current_user.id).first || 
+           BuddyRelationship.where(user_id: current_user.id, buddy_id: params[:buddy_id]).first
   @buddy.destroy
-  flash[:notice] = "Removed Buddy"
-  redirect "/users/:user_id/buddies"
+  p "Removed Buddy"
+  redirect "/users/#{params[:user_id]}/buddies"
 end

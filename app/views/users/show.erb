@@ -38,13 +38,19 @@
   <p><a href="/users/<%=@user.id%>/conversations/new">New Message</a></p>
 <% end %>
 
-<% if logged_in? && @user.id != current_user.id && !current_user.buddys.include?(@user)%>
+<% if logged_in? && @user.id != current_user.id && current_user.pending_buddies.include?(@user)%>
+  <h3>(Buddy Request Pending...)</h3>
+<% elsif logged_in? && @user.id != current_user.id && !current_user.accepted_buddies.include?(@user)%>
   <form action="/users/<%=@user.id%>/buddies" method="post">
-    <input type="submit" value="Add Friend">
+    <input type="submit" value="Add Buddy">
   </form>
 <% elsif logged_in? && @user.id == current_user.id %>
 <% else %>
-    <h3>Already friends!</h3>
+  <h3>Already friends!</h3>
+  <form action="/users/<%=@user.id%>/buddies" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Remove Buddy">
+  </form>
 <% end %>
 
 <!-- #messages
