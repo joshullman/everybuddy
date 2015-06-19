@@ -24,11 +24,17 @@ User.create(first_name: "Henry", last_name: "Vega", email: "w@aol.com", username
 User.create(first_name: "Karan", last_name: "Aditya", email: "x@aol.com", username: "TheMatador", password: "password")
 User.create(first_name: "Kelvin", last_name: "Gann", email: "y@aol.com", username: "SubZero", password: "password")
 User.create(first_name: "Nicholas", last_name: "Toulouse", email: "z@aol.com", username: "WildCard", password: "password")
+User.create(first_name: "Tanay", last_name: "Arora", email: "tasty@aol.com", username: "Tasty", password: "password")
 User.create(first_name: "Staunton", last_name: "Sample", email: "karatekid@aol.com", username: "KarateKid", password: "password")
+User.create(first_name: "Erica", last_name: "Prenga", email: "thesavior@aol.com", username: "Boomer", password: "password")
+User.create(first_name: "Tom", last_name: "Tom", email: "tom@aol.com", username: "TomTom", password: "password")
+User.create(first_name: "Brick", last_name: "Thornton", email: "brick@aol.com", username: "BrickThorn", password: "password")
+User.create(first_name: "Hunter", last_name: "Chapman", email: "hunter@aol.com", username: "ChampMan", password: "password")
+User.create(first_name: "Jared", last_name: "Grippe", email: "jumpy@aol.com", username: "FrogPrince", password: "password")
 
 Tag.create(name: "hiking")
 Tag.create(name: "surfing")
-Tag.create(name: "assassin")
+Tag.create(name: "murder")
 Tag.create(name: "sexy time")
 Tag.create(name: "concert")
 Tag.create(name: "study")
@@ -36,10 +42,56 @@ Tag.create(name: "video game")
 Tag.create(name: "mythical creature hunting")
 Tag.create(name: "banana")
 Tag.create(name: "wolfjob")
-40.times do
-  a = (1 + rand(20))
-  b = (1 + rand(10))
+Tag.create(name: "rock climbing")
+Tag.create(name: "parachuting")
+Tag.create(name: "jogging")
+Tag.create(name: "burrito")
+Tag.create(name: "yoga")
+Tag.create(name: "jam sesh")
+Tag.create(name: "purgery")
+Tag.create(name: "road trip")
+Tag.create(name: "treason")
+Tag.create(name: "shopping")
+
+Conversation.create(sender: 1, receiver: 2, title: "Hey")
+Conversation.create(sender: 1, receiver: 33, title: "FRAWGS")
+Conversation.create(sender: 5, receiver: 18, title: "How about them murder buddies")
+Conversation.create(sender: 2, receiver: 1, title: "How weird")
+Conversation.create(sender: 33, receiver: 1, title: "PAAAAAANDAS")
+Message.create(conversation_id: 1, user_id: 1, content: "What's up?")
+Message.create(conversation_id: 1, user_id: 2, content: "Nothing much, you?")
+Message.create(conversation_id: 1, user_id: 1, content: "Just watching Jared lecture")
+Message.create(conversation_id: 1, user_id: 1, content: "Frogs4lyfe")
+Message.create(conversation_id: 2, user_id: 1, content: "What's up?")
+Message.create(conversation_id: 2, user_id: 33, content: "Nothing much, you?")
+Message.create(conversation_id: 2, user_id: 1, content: "Just watching Jared lecture")
+Message.create(conversation_id: 2, user_id: 1, content: "Frogs4lyfe")
+Message.create(conversation_id: 3, user_id: 5, content: "MURDER TRAAAAAAAIN")
+Message.create(conversation_id: 4, user_id: 2, content: "let's see if this works")
+Message.create(conversation_id: 4, user_id: 1, content: "Does it?")
+Message.create(conversation_id: 5, user_id: 33, content: "Aren't they just the cutest thing ever?")
+Message.create(conversation_id: 5, user_id: 1, content: "b^_^d")
+
+100.times do
+  a = (1 + rand(33))
+  b = (1 + rand(20))
   UserTag.create(user_id: a, tag_id: b)
+end
+
+60.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first
+		BuddyRelationship.create(user_id: a, buddy_id: b, accepted: true)
+	end
+end
+
+30.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first
+		BuddyRelationship.create(user_id: a, buddy_id: b)
+	end
 end
 
 

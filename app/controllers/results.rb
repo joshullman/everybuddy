@@ -9,5 +9,6 @@ post '/results' do
      @users << user if tag.name == params[:tag]
    end
   end
+  p @users
   erb :results
 end

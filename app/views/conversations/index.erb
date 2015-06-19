@@ -1,0 +1,27 @@
+<p><a href="/users/<%= current_user.id %>">Profile</a></p>
+<h3>Your Conversations:</h3>
+  <% @conversations.each do |conversation| %>
+    <% if User.find(conversation.sender).id == current_user.id %>
+      <p><%= conversation.created_at %></p>
+      <p><a href="/users/<%= User.find(conversation.receiver).id %>"><%= User.find(conversation.receiver).username %>:</a></p>
+      <p>
+        <a href="/users/<%= current_user.id %>/conversations/<%= conversation.id %>"><%= conversation.title %></a>
+        <form action="/users/<%=current_user.id%>/conversations/<%= conversation.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Delete">
+        </form>
+      </p>
+      <br>
+    <% else %>
+      <p><%= conversation.created_at %></p>
+      <p><a href="/users/<%= User.find(conversation.sender).id %>"><%= User.find(conversation.sender).username %>:</a></p>
+      <p>
+        <a href="/users/<%= current_user.id %>/conversations/<%= conversation.id %>"><%= conversation.title %></a>
+        <form action="/users/<%=current_user.id%>/conversations/<%= conversation.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Delete">
+        </form>
+      </p>
+      <br>
+    <% end %>
+  <% end %>
