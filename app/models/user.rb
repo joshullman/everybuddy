@@ -9,8 +9,14 @@ class User < ActiveRecord::Base
   has_many :sent_convos, class_name: "Conversation", source: :user_one, foreign_key: "sender"
   has_many :received_convos, class_name: "Conversation", source: :user_two, foreign_key: "receiver"
 
-  def conversations(id)
-    Conversation.where("conversations.sender = #{id} OR conversations.receiver = #{id}").order(created_at: :desc)
+  def conversations
+    Conversation.where("conversations.sender = #{self.id} OR conversations.receiver = #{self.id}").order(created_at: :desc)
+  end
+
+  def conversations_with(id)
+    self_id = self.id
+    Conversation.where("conversations.sender = #{self_id} AND conversations.receiver = #{id} OR 
+                        conversations.sender = #{id} AND conversations.receiver = #{self.id}").order(created_at: :desc)
   end
 
   has_many :messages

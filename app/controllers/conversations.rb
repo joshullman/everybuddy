@@ -1,13 +1,13 @@
 #all
-get	"/users/:user_id/conversations" do
-	@conversations = current_user.conversations(current_user.id)
+get	"/conversations" do
+	@conversations = current_user.conversations
 	erb :"conversations/index"
 end
 
 #new
 get	"/users/:user_id/conversations/new" do
 	@user = User.find(params[:user_id])
-	@records = current_user.conversations(params[:user_id])
+	@records = current_user.conversations_with(params[:user_id])
   @conversation = Conversation.new
   @message = Message.new
   erb :"conversations/new"
@@ -24,7 +24,7 @@ post	"/users/:user_id/conversations" do
   end
 
   if @message.save
-    redirect "/users/#{current_user.id}/conversations/#{@conversation.id}"
+    redirect "/conversations/#{@conversation.id}"
   else
   	status 400
     erb :"conversations/new"
@@ -32,7 +32,7 @@ post	"/users/:user_id/conversations" do
 end
 
 #show
-get	"/users/:user_id/conversations/:conversation_id" do
+get	"/conversations/:conversation_id" do
 	@conversation = Conversation.find(params[:conversation_id])
 	@messages = @conversation.messages
 	@new_message = Message.new
@@ -41,7 +41,7 @@ end
 
 
 # #delete
-delete '/users/:user_id/conversations/:conversation_id' do
+delete '/conversations/:conversation_id' do
 	@conversation = Conversation.find(params[:conversation_id])
 	  if @conversation
 	    @conversation.destroy
@@ -49,14 +49,13 @@ delete '/users/:user_id/conversations/:conversation_id' do
 	    status 404
 	    "Conversation not found"
 	  end
-	  redirect "/users/:user_id/conversations"
+	  redirect "/conversations"
 end
 
-post	"/users/:user_id/conversations/:conversation_id/message" do
-	p params[:conversation_id]
+post	"/conversations/:conversation_id/message" do
 	@message = Message.new(conversation_id: params[:conversation_id], user_id: current_user.id, content: params[:content])
   if @message.save
-    redirect "/users/#{current_user.id}/conversations/#{@message.conversation_id}"
+    redirect "conversations/#{@message.conversation_id}"
   else
   	status 400
     erb :"conversations/new"
