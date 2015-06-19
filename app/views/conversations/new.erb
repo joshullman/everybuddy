@@ -2,10 +2,8 @@
 <p><a href="/users/<%= @user.id %>">Back</a></p>
 <h3>Conversations with <%= @user.username %>:</h3>
 <ul>
-  <% @records.each do |conversations| %>
-    <% conversations.each do |conversation| %>
-    	<li><a href="/users/<%= current_user.id %>/conversations/<%= conversation.id %>"><%= conversation.title %></a></li>
-    <% end %>
+  <% @records.each do |conversation| %>
+    	<li><a href="/users/<%= current_user.id %>/conversations/<%= conversation.id %>">(<%= conversation.created_at %>): <%= conversation.title %></a></li>
   <% end %>
 </ul>
 

@@ -7,11 +7,7 @@ end
 #new
 get	"/users/:user_id/conversations/new" do
 	@user = User.find(params[:user_id])
-	@records = []
-	first = Conversation.where(sender: params[:user_id])
-	second = Conversation.where(receiver: params[:user_id])
-	@records << first
-	@records << second
+	@records = current_user.conversations(params[:user_id])
   @conversation = Conversation.new
   @message = Message.new
   erb :"conversations/new"

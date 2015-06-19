@@ -72,10 +72,26 @@ Message.create(conversation_id: 4, user_id: 1, content: "Does it?")
 Message.create(conversation_id: 5, user_id: 33, content: "Aren't they just the cutest thing ever?")
 Message.create(conversation_id: 5, user_id: 1, content: "b^_^d")
 
-75.times do
+100.times do
   a = (1 + rand(33))
   b = (1 + rand(20))
   UserTag.create(user_id: a, tag_id: b)
+end
+
+60.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first
+		BuddyRelationship.create(user_id: a, buddy_id: b, accepted: true)
+	end
+end
+
+30.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first
+		BuddyRelationship.create(user_id: a, buddy_id: b)
+	end
 end
 
 
