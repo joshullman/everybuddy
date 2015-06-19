@@ -45,6 +45,7 @@
     <input type="submit" value="Add Buddy">
   </form>
 <% elsif logged_in? && @user.id == current_user.id %>
+<% elsif !logged_in? %>
 <% else %>
   <h3>Already friends!</h3>
   <form action="/users/<%=current_user.id%>/buddies/<%=@user.id%>" method="post">

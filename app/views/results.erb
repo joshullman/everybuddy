@@ -9,8 +9,14 @@
 <% end %>
 
 <h1>RESULTS:</h1>
+<% if !logged_in? %>
 <% @users.each do |user| %>
-	<% if user.id != current_user.id%>
 		<p><a href="/users/<%= user.id %>"><%= user.username %></a></p>
+	<% end %>
+<% else %>
+	<% @users.each do |user| %>
+		<% if user.id != current_user.id %>
+			<p><a href="/users/<%= user.id %>"><%= user.username %></a></p>
+		<% end %>
 	<% end %>
 <% end %>
