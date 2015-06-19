@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   # has_many :authorized_friends, :through => :friendships, :source => :friend, :conditions => [ "authorized = ?", true ]
   # has_many :unauthorized_friends, :through => :friendships, :source => :friend, :conditions => [ "authorized = ?", false ]
 
-  validates :first_name, :last_name, :username, :email, :password, presence: true
+  validates :name, :username, :email, :password, presence: true
   validates :username, uniqueness: true
   validates :email, uniqueness: true
 

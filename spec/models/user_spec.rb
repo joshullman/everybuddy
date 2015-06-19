@@ -4,8 +4,8 @@ describe User do
 
 	def create_user(name)
 		User.create!(
-			first_name: name,
-			last_name: name,
+			name: name,
+			gender: name,
 			username: name,
 			email: "#{name}@example.org",
 			password: 'password',
