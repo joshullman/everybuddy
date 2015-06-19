@@ -1,3 +1,4 @@
+<p><a href="/users/<%= current_user.id %>">Profile</a></p>
 <h3>Tags:</h3>
 <ul>
   <% @tags.each do |tag| %>
@@ -5,10 +6,9 @@
   <% end %>
 </ul>
 
-<form action="/users/<%= current_user.id %>/tags" method="post">
+<form action="/tags" method="post">
   <label for="tag">Add Tag</label>
   <input type="text" name="tag" value="<%= @tag.name %>"/>
   <input type="submit" value="Add Tag">
 </form>
 
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>

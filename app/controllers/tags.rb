@@ -1,11 +1,11 @@
 #index
-get '/users/:user_id/tags' do
+get '/tags' do
   @tags = current_user.tags
   erb :"tags/index"
 end
 
 #new
-get '/users/:user_id/tags/new' do
+get '/tags/new' do
   @tags = current_user.tags
   @tag = Tag.new
   @user_tag = UserTag.new(user_id: current_user.id)
@@ -13,7 +13,7 @@ get '/users/:user_id/tags/new' do
 end
 
 #create
-post '/users/:user_id/tags' do
+post '/tags' do
   @tag = Tag.find_by(name: params[:tag]) || @tag = Tag.new(name: params[:tag])
   @tag.save
   @user_tag = UserTag.new(user_id: current_user.id, tag_id: @tag.id)
@@ -27,7 +27,7 @@ post '/users/:user_id/tags' do
 end
 
 #delete
-delete '/users/:user_id/tags/:tag_id' do
+delete '/tags/:tag_id' do
 @user_tag = UserTag.where(user_id: current_user.id, tag_id: params[:tag_id]).first
   if @user_tag
     @user_tag.destroy
@@ -35,5 +35,5 @@ delete '/users/:user_id/tags/:tag_id' do
     status 404
     "Tag not found"
   end
-  redirect "/users/:user_id/tags"
+  redirect "/tags"
 end
