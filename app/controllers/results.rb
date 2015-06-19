@@ -11,7 +11,3 @@ post '/results' do
   end
   erb :results
 end
-
-#could be tags/
-# tags/:id
-# users.where id is id
