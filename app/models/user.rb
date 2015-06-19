@@ -17,8 +17,6 @@ class User < ActiveRecord::Base
 
   has_many :buddy_relationships
   has_many :buddies, :through => :buddy_relationships
-  has_many :inverse_buddies, :class_name => "Buddy", :foreign_key => "buddy_id"
-  has_many :inverse_buddys, :through => :inverse_buddies, :source => :user
 
   def accepted_buddies
     id = self.id
