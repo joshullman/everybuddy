@@ -27,9 +27,9 @@
   <p><a href="/tags">Show Tags</a></p>
   <p><a href="/tags/new">Add Tags</a></p>
   <p><a href="/conversations">Show Conversations</a></p>
-  <p><a href="/users/<%=current_user.id%>/buddies">Your Buddies</a></p>
-  <p><a href="/users/<%=current_user.id%>/buddies/pending">Pending Buddies</a></p>
-  <p><a href="/users/<%=current_user.id%>/buddies/requests">Buddy Requests</a></p>
+  <p><a href="/buddies">Your Buddies</a></p>
+  <p><a href="/buddies/pending">Pending Buddies</a></p>
+  <p><a href="/buddies/requests">Buddy Requests</a></p>
 <% elsif logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%=@user.id%>/conversations/new">New Message</a></p>
 <% end %>
@@ -44,7 +44,7 @@
 <% elsif !logged_in? %>
 <% else %>
   <h3>Already friends!</h3>
-  <form action="/users/<%=current_user.id%>/buddies/<%=@user.id%>" method="post">
+  <form action="/buddies/<%=@user.id%>" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Remove Buddy">
   </form>

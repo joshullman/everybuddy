@@ -4,10 +4,10 @@
     <p>
       <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
       <% if current_user %>
-      	<form action="/users/<%=current_user.id%>/buddies/<%= buddy.id %>/new" method="post">
+      	<form action="/buddies/<%= buddy.id %>/new" method="post">
 	        <input type="submit" value="Add Buddy">
         </form>
-        <form action="/users/<%=current_user.id%>/buddies/<%= buddy.id %>" method="post">
+        <form action="/buddies/<%= buddy.id %>" method="post">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" value="Ignore Request">
         </form>
