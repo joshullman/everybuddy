@@ -51,14 +51,14 @@ end
 
 #delete
 delete '/users/:id' do
-@user = User.find(params[:id])
-  if @user
-    @user.destroy
-  else
-    status 404
-    "User not found"
-  end
-  redirect "/"
+  @user = User.find(params[:id])
+    if @user
+      @user.destroy
+    else
+      status 404
+      "User not found"
+    end
+    redirect "/"
 end
 
 
