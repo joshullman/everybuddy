@@ -1,10 +1,16 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-	include BCrypt
+  include BCrypt
+
+  validates :name, :username, :email, :password, presence: true
+  validates :username, uniqueness: true
+  validates :email, uniqueness: true
 
   has_many :user_tags
   has_many :tags, -> {distinct}, through: :user_tags
+
+  ###########################################################################
 
   has_many :sent_convos, class_name: "Conversation", source: :user_one, foreign_key: "sender"
   has_many :received_convos, class_name: "Conversation", source: :user_two, foreign_key: "receiver"
@@ -14,12 +20,13 @@ class User < ActiveRecord::Base
   end
 
   def conversations_with(id)
-    self_id = self.id
-    Conversation.where("conversations.sender = #{self_id} AND conversations.receiver = #{id} OR 
+    Conversation.where("conversations.sender = #{self.id} AND conversations.receiver = #{id} OR 
                         conversations.sender = #{id} AND conversations.receiver = #{self.id}").order(created_at: :desc)
   end
 
   has_many :messages
+
+  ##########################################################################
 
   has_many :buddy_relationships
   has_many :buddies, :through => :buddy_relationships
@@ -55,19 +62,7 @@ class User < ActiveRecord::Base
     return buddy_requests
   end
 
-  # def buddies(id)
-  #   Buddy.where("buddies.user_id = #{id} OR buddies.buddy_id = #{id}").order(created_at: :desc)
-  # end
-
-  # has_many :buddies, class_name: "Buddy", source: :user, foreign_key: "user_id"
-  # has_many :
-
-  # has_many :authorized_friends, :through => :friendships, :source => :friend, :conditions => [ "authorized = ?", true ]
-  # has_many :unauthorized_friends, :through => :friendships, :source => :friend, :conditions => [ "authorized = ?", false ]
-
-  validates :name, :username, :email, :password, presence: true
-  validates :username, uniqueness: true
-  validates :email, uniqueness: true
+  ##########################################################################
 
   def password
     @password ||= Password.new(password_hash)
