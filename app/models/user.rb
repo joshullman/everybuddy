@@ -32,19 +32,17 @@ class User < ActiveRecord::Base
   has_many :buddies, :through => :buddy_relationships
 
   def accepted_buddies
-    id = self.id
-    buddy_rels = BuddyRelationship.where("(buddy_relationships.user_id = #{id} OR buddy_relationships.buddy_id = #{id}) AND buddy_relationships.accepted = true")
+    buddy_rels = BuddyRelationship.where("(buddy_relationships.user_id = #{self.id} OR buddy_relationships.buddy_id = #{self.id}) AND buddy_relationships.accepted = true")
     accepted_buddies = []
     buddy_rels.each do |buddy_rel|
-      accepted_buddies << User.find(buddy_rel.user_id) if id != User.find(buddy_rel.user_id).id
-      accepted_buddies << User.find(buddy_rel.buddy_id) if id != User.find(buddy_rel.buddy_id).id
+      accepted_buddies << User.find(buddy_rel.user_id) if self.id != User.find(buddy_rel.user_id).id
+      accepted_buddies << User.find(buddy_rel.buddy_id) if self.id != User.find(buddy_rel.buddy_id).id
     end
     return accepted_buddies
   end
 
   def pending_buddies
-    id = self.id
-    buddy_rels = BuddyRelationship.where("buddy_relationships.user_id = #{id} AND buddy_relationships.accepted = false")
+    buddy_rels = BuddyRelationship.where("buddy_relationships.user_id = #{self.id} AND buddy_relationships.accepted = false")
     pending_buddies = []
     buddy_rels.each do |buddy_rel|
       pending_buddies << User.find(buddy_rel.buddy_id)
@@ -53,8 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def buddy_requests
-    id = self.id
-    buddy_rels = BuddyRelationship.where("buddy_relationships.buddy_id = #{id} AND buddy_relationships.accepted = false")
+    buddy_rels = BuddyRelationship.where("buddy_relationships.buddy_id = #{self.id} AND buddy_relationships.accepted = false")
     buddy_requests = []
     buddy_rels.each do |buddy_rel|
       buddy_requests << User.find(buddy_rel.user_id)
