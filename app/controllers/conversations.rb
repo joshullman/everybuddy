@@ -41,7 +41,7 @@ end
 
 
 # #delete
-delete '/conversations/:conversation_id' do
+delete "/conversations/:conversation_id" do
 	@conversation = Conversation.find(params[:conversation_id])
 	  if @conversation
 	    @conversation.destroy

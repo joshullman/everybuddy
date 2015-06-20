@@ -1,11 +1,11 @@
 #index
-get '/tags' do
+get "/tags" do
   @tags = current_user.tags
   erb :"tags/index"
 end
 
 #new
-get '/tags/new' do
+get "/tags/new" do
   @tags = current_user.tags
   @tag = Tag.new
   @user_tag = UserTag.new(user_id: current_user.id)
@@ -13,7 +13,7 @@ get '/tags/new' do
 end
 
 #create
-post '/tags' do
+post "/tags" do
   @tag = Tag.find_by(name: params[:tag]) || @tag = Tag.new(name: params[:tag])
   @tag.save
   @user_tag = UserTag.new(user_id: current_user.id, tag_id: @tag.id)
@@ -27,7 +27,7 @@ post '/tags' do
 end
 
 #delete
-delete '/tags/:tag_id' do
+delete "/tags/:tag_id" do
 @user_tag = UserTag.where(user_id: current_user.id, tag_id: params[:tag_id]).first
   if @user_tag
     @user_tag.destroy

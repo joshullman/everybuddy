@@ -1,8 +1,8 @@
-get '/results' do
+get "/results" do
 	erb :results
 end
 
-post '/results' do
+post "/results" do
   @users = []
   User.all.each do |user|
    user.tags.each do |tag|
