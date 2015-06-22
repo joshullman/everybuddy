@@ -48,9 +48,10 @@
   <p><a href="/buddies">Your Buddies</a></p>
   <p><a href="/buddies/pending">Pending Buddies</a></p>
   <p><a href="/buddies/requests">Buddy Requests</a></p>
-  <p><a href="/events">Events</a></p>
+  <p><a href="/users/<%= current_user.id %>/events">Your Events</a></p>
 <% elsif logged_in? && @user.id != current_user.id %>
-  <p><a href="/users/<%=@user.id%>/conversations/new">New Message</a></p>
+  <p><a href="/users/<%= @user.id %>/events"><%= @user.username %>'s Events</a></p>
+  <p><a href="/users/<%= @user.id%>/conversations/new">New Message</a></p>
 <% end %>
 
 <% if logged_in? && @user.id != current_user.id && current_user.pending_buddies.include?(@user)%>

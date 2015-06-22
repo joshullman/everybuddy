@@ -1,6 +1,7 @@
 #all
-get	"users/:user_id/events" do
-	@events = User.find(:user_id).events
+get	"/users/:user_id/events" do
+	@user = User.find(params[:user_id])
+	@events = @user.events
 	erb :"events/index"
 end
 
@@ -16,7 +17,7 @@ post "/events" do
 	@event = Event.new(poster: current_user.id)
 	@event.assign_attributes(params[:event])
 	if @event.save
-		redirect "/events/#{@event.id}"
+		redirect "/users/#{current_user.id}/events/#{@event.id}"
 	else
 		status 400
     erb :"events/new"
@@ -24,7 +25,8 @@ post "/events" do
 end
 
 #show
-get	"/events/:event_id" do
+get	"/users/:user_id/events/:event_id" do
+	@user = User.find(params[:user_id])
 	@event = Event.find(params[:event_id])
 	erb :"events/show"
 end
@@ -45,7 +47,7 @@ put "/events/:event_id" do
   @event = Event.find(params[:event_id])
   @event.assign_attributes(params[:event])
   if @event.save
-    redirect "/events/#{@event.id}"
+    redirect "/users/#{current_user.id}/events/#{@event.id}"
   else
     status 401
     erb :"events/edit"
@@ -61,5 +63,5 @@ delete "/events/:event_id" do
 	    status 404
 	    "Event not found"
 	  end
-	  redirect "/events"
+	  redirect "/users/#{current_user.id}/events"
 end

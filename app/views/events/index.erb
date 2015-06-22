@@ -6,25 +6,41 @@
 
   <p><a href="/events/new">New Event</a></p>
 
-  <h3><%= current_user.username %>'s Events:</h3>
+  <h3><%= @user.username %>'s Events:</h3>
+  
   <% @events.each do |event| %>
-    <p>
-      <a href="/events/<%= event.id %>"><%= event.name %></a>
-      <br>
-      <%= event.time %>
-      <br>
-      <%= event.location%>
-      <% if @event.is_private == true %>
-        <h3>Private Event</h3>
-      <% else %>
-        <h3>Public Event</h3>
-      <% end %>
-      <% if current_user %>
+
+    <% if event.is_private == false && @user.id != current_user.id %>
+      <p>
+        <a href="/users/<%= @user.id %>/events/<%= event.id %>"><%= event.name %></a>
+        <br>
+        <%= event.time %>
+        <br>
+        <%= event.location%>
+      </p>
+    <% end %>
+
+    <% if @user.id == current_user.id %>
+      <p>
+        <a href="/users/<%= @user.id %>/events/<%= event.id %>"><%= event.name %></a>
+        <br>
+        <%= event.time %>
+        <br>
+        <%= event.location%>
+
+        <% if event.is_private == true %>
+          <h3>Private Event</h3>
+        <% else %>
+          <h3>Public Event</h3>
+        <% end %>
+
         <form action="/events/<%= event.id %>" method="post">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" value="Delete Event">
         </form>
-      <% end %>
-    </p>
+        
+      </p>
+    <% end %>
+
   <% end %>
 </div>
