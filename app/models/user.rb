@@ -66,12 +66,12 @@ class User < ActiveRecord::Base
   has_many :accepted_events, class_name: "Event", source: :user_two, foreign_key: "buddy"
 
   def events
-    Event.where("events.posted_events = #{self.id} OR events.accepted_events = #{self.id}").order(created_at: :desc)
+    Event.where("events.poster = #{self.id} OR events.buddy = #{self.id}").order(created_at: :desc)
   end
 
   def events_with(id)
-    Event.where("events.posted_events = #{self.id} AND events.accepted_events = #{id} OR 
-                 events.posted_events = #{id} AND events.accepted_events = #{self.id}").order(created_at: :desc)
+    Event.where("events.poster = #{self.id} AND events.buddy = #{id} OR 
+                 events.poster = #{id} AND events.buddy = #{self.id}").order(created_at: :desc)
   end
 
   ##########################################################################

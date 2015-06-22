@@ -29,13 +29,13 @@ end
 
 #show
 get	"/events/:event_id" do
-	@events = Event.find(params[:event_id])
+	@event = Event.find(params[:event_id])
 	erb :"events/show"
 end
 
 #edit
 get "/events/:event_id/edit" do
-  @event = Event.find(session[:event_id])
+  @event = Event.find(params[:event_id])
   if @event
     erb :"events/edit"
   else
@@ -46,9 +46,9 @@ end
 
 #update
 put "/events/:event_id" do
-  @event = Event.find(session[:event_id])
+  @event = Event.find(params[:event_id])
   if @event.save
-    redirect "/events/#{@event.id}/"
+    redirect "/events/#{@event.id}"
   else
     status 401
     erb :"events/edit"

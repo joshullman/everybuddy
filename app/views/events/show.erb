@@ -5,16 +5,15 @@
 
 <div>
 	<h3><%= @event.name %>:</h3>
-	<h2><%= @event.time %></h2>
-	<h2><%= @event.location %></h2>
-	<h2>Hanging out with: <%= @event.buddy%></h2>
+	<h4><%= @event.time %></h4>
+	<h4><%= @event.location %></h4>
+	<h4>Hanging out with: <%= @event.buddy%></h4>
 	<br>
 
-	<form action="/events/<%= event.id %>/edit" method="post">
-    <input type="hidden" name="_method" value="put">
+	<form action="/events/<%= @event.id %>/edit" method="get">
     <input type="submit" value="Edit Event">
   </form>
-  <form action="/events/<%= event.id %>" method="post">
+  <form action="/events/<%= @event.id %>" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Event">
   </form>
