@@ -2,6 +2,10 @@
   <% if logged_in? %>
     <button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
     <button class="btn left"><a href="/">Search</a></button>
+    <button class="btn left"><a href="/tags">Tags</a></button>
+    <button class="btn left"><a href="/conversations">Convos</a></button>
+    <button class="btn left"><a href="/buddies">Buddies</a></button>
+    <button class="btn left"><a href="/users/<%= current_user.id %>/events">Events</a></button>
     <button class="btn right"><a href="/logout">Logout</a></button>
   <% else %>
     <button class="btn left"><a href="/login">Login</a></button>
@@ -42,13 +46,8 @@
 
 <% if logged_in? && @user.id == current_user.id %>
   <p><a href="/users/<%=current_user.id%>/edit">Edit Profile</a></p>
-  <p><a href="/tags">Show Tags</a></p>
-  <p><a href="/tags/new">Add Tags</a></p>
-  <p><a href="/conversations">Show Conversations</a></p>
-  <p><a href="/buddies">Your Buddies</a></p>
   <p><a href="/buddies/pending">Pending Buddies</a></p>
   <p><a href="/buddies/requests">Buddy Requests</a></p>
-  <p><a href="/users/<%= current_user.id %>/events">Your Events</a></p>
 <% elsif logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%= @user.id %>/events"><%= @user.username %>'s Events</a></p>
   <p><a href="/users/<%= @user.id%>/conversations/new">New Message</a></p>
