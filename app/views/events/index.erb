@@ -1,20 +1,32 @@
-<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
-<button class="btn left"><a href="/tags">Tags</a></button>
-<button class="btn left"><a href="/conversations">Convos</a></button>
-<button class="btn left"><a href="/buddies">Buddies</a></button>
-<button class="btn left"><a href="/users/<%= current_user.id %>/events">Events</a></button>
-<button class="btn right"><a href="/logout">Logout</a></button>
+<nav>
+  <% if logged_in? %>
+    <button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+    <button class="btn left"><a href="/">Search</a></button>
+    <button class="btn left"><a href="/tags">Tags</a></button>
+    <button class="btn left"><a href="/conversations">Convos</a></button>
+    <button class="btn left"><a href="/buddies">Buddies</a></button>
+    <button class="btn left"><a href="/users/<%= current_user.id %>/events">Events</a></button>
+    <button class="btn right"><a href="/logout">Logout</a></button>
+  <% else %>
+    <button class="btn left"><a href="/login">Login</a></button>
+    <button class="btn left"><a href="/users/new">Register</a></button>
+    <button class="btn left"><a href="/">Search</a></button>
+  <% end %>
+</nav>
 </br>
 
 <div>
 
+<% if @user.id != current_user.id %>
+  <p><a href="/events/new">New Event with <%= @user.username %></a></p>
+<% else %>
   <p><a href="/events/new">New Event</a></p>
+<% end %>
 
   <h3><%= @user.username %>'s Events:</h3>
-
   <% @events.each do |event| %>
 
-    <% if event.is_private == false && @user.id != current_user.id %>
+    <% if @user.id != current_user.id && event.is_private == false %>
       <p>
         <a href="/users/<%= @user.id %>/events/<%= event.id %>"><%= event.name %></a>
         <br>

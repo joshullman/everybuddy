@@ -1,10 +1,18 @@
-<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
-<button class="btn left"><a href="/users/<%= @user.id %>events">Events</a></button>
-<button class="btn left"><a href="/tags">Tags</a></button>
-<button class="btn left"><a href="/conversations">Convos</a></button>
-<button class="btn left"><a href="/buddies">Buddies</a></button>
-<button class="btn left"><a href="/users/<%= current_user.id %>/events">Events</a></button>
-<button class="btn right"><a href="/logout">Logout</a></button>
+<nav>
+  <% if logged_in? %>
+    <button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+    <button class="btn left"><a href="/">Search</a></button>
+    <button class="btn left"><a href="/tags">Tags</a></button>
+    <button class="btn left"><a href="/conversations">Convos</a></button>
+    <button class="btn left"><a href="/buddies">Buddies</a></button>
+    <button class="btn left"><a href="/users/<%= current_user.id %>/events">Events</a></button>
+    <button class="btn right"><a href="/logout">Logout</a></button>
+  <% else %>
+    <button class="btn left"><a href="/login">Login</a></button>
+    <button class="btn left"><a href="/users/new">Register</a></button>
+  	<button class="btn left"><a href="/">Search</a></button>
+  <% end %>
+</nav>
 <br>
 
 <div>
@@ -15,10 +23,11 @@
 		<h4>Private Event</h4>
 	<% else %>
 		<h4>Public Event</h4>
+    
 	<% end %>
 	<h4>Hanging out with: <%= @event.buddy%></h4>
 	<br>
-
+  <% if current_user.id == @user.id %>
 	<form action="/events/<%= @event.id %>/edit" method="get">
     <input type="submit" value="Edit Event">
   </form>
@@ -26,5 +35,6 @@
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Event">
   </form>
+  <% end %>
 </div>
 

@@ -1,9 +1,18 @@
-<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
-<button class="btn left"><a href="/tags">Tags</a></button>
-<button class="btn left"><a href="/conversations">Convos</a></button>
-<button class="btn left"><a href="/buddies">Buddies</a></button>
-<button class="btn left"><a href="/users/<%= current_user.id %>/events">Events</a></button>
-<button class="btn right"><a href="/logout">Logout</a></button>
+<nav>
+  <% if logged_in? %>
+    <button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+    <button class="btn left"><a href="/">Search</a></button>
+    <button class="btn left"><a href="/tags">Tags</a></button>
+    <button class="btn left"><a href="/conversations">Convos</a></button>
+    <button class="btn left"><a href="/buddies">Buddies</a></button>
+    <button class="btn left"><a href="/users/<%= current_user.id %>/events">Events</a></button>
+    <button class="btn right"><a href="/logout">Logout</a></button>
+  <% else %>
+    <button class="btn left"><a href="/login">Login</a></button>
+    <button class="btn left"><a href="/users/new">Register</a></button>
+    <button class="btn left"><a href="/">Search</a></button>
+  <% end %>
+</nav>
 <br>
 
 <div class="center">
