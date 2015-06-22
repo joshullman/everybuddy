@@ -14,6 +14,11 @@
       <%= event.time %>
       <br>
       <%= event.location%>
+      <% if @event.is_private == true %>
+        <h3>Private Event</h3>
+      <% else %>
+        <h3>Public Event</h3>
+      <% end %>
       <% if current_user %>
         <form action="/events/<%= event.id %>" method="post">
           <input type="hidden" name="_method" value="delete">

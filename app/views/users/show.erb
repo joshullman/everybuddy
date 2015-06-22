@@ -41,9 +41,7 @@
 </form> -->
 
 <% if logged_in? && @user.id == current_user.id %>
-  <form action="/users/<%=current_user.id%>/edit" method="get">
-    <input type="submit" value="Edit Profile">
-  </form>
+  <p><a href="/users/<%=current_user.id%>/edit">Edit Profile</a></p>
   <p><a href="/tags">Show Tags</a></p>
   <p><a href="/tags/new">Add Tags</a></p>
   <p><a href="/conversations">Show Conversations</a></p>

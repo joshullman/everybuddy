@@ -7,6 +7,11 @@
 	<h3><%= @event.name %>:</h3>
 	<h4><%= @event.time %></h4>
 	<h4><%= @event.location %></h4>
+	<% if @event.is_private == true %>
+		<h4>Private Event</h4>
+	<% else %>
+		<h4>Public Event</h4>
+	<% end %>
 	<h4>Hanging out with: <%= @event.buddy%></h4>
 	<br>
 
