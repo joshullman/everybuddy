@@ -13,7 +13,11 @@ $(document).ready(function() {
       url: $form.attr('action'),
       type: $form.attr('method'),
       data: $form.serialize()
-    })
+    }).done(function (response){
+      $form.closest('li').remove();
+    }).fail(function (response) {
+      $submit_input.val("Failed, retry?")
+    }) 
 
   })
 

@@ -1,3 +1,26 @@
+* {
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+nav {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+nav button {
+  margin-right: 10px;
+}
+nav button a {
+  text-decoration: none;
+  color: black;
+}
+
+.right {
+  float: right;
+}
+.left {
+  float: left;
+}
+
 .container {
   margin: 20px auto;
   width: 600px;
@@ -19,3 +42,7 @@ th {
 	width: 10px;
 	height: 10px;
 }*/
+
+.center {
+	text-align: center;
+}

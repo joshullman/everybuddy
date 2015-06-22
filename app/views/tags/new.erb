@@ -1,14 +1,16 @@
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<h3>Tags:</h3>
-<ul>
-  <% @tags.each do |tag| %>
-    <li><%= tag.name %></li>
-  <% end %>
-</ul>
+<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+<br>
 
-<form action="/tags" method="post">
-  <label for="tag">Add Tag</label>
-  <input type="text" name="tag" />
-  <input type="submit" value="Add Tag">
-</form>
+<div class="center">
+	<h3>Tags:</h3>
+	<ul>
+	  <% @tags.each do |tag| %>
+	    <li><%= tag.name %></li>
+	  <% end %>
+	</ul>
 
+	<form action="/tags" method="post">
+	  <input type="text" name="tag" />
+	  <input type="submit" value="Add Tag">
+	</form>
+</div>

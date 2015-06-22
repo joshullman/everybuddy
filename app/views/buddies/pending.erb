@@ -1,7 +1,12 @@
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<h3><%= @user.username %>'s Pending Buddies:</h3>
+<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+<button class="btn right"><a href="/logout">Logout</a></button>
+<br>
+
+<div>
+	<h3><%= @user.username %>'s Pending Buddies:</h3>
   <% @buddies.each do |buddy| %>
     <p>
       <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
     </p>
   <% end %>
+ </div>

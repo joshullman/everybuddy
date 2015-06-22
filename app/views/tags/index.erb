@@ -1,5 +1,8 @@
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<h3>Your Tags:</h3>
+<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+
+<br>
+<div class="center">
+  <h3>Your Tags:</h3>
   <% @tags.each do |tag| %>
     <p>
       <form action="/results" method="post">
@@ -11,4 +14,5 @@
       </form>
     </p>
   <% end %>
+</div>
 

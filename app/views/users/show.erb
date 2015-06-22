@@ -1,23 +1,28 @@
-<% if logged_in? %>
-  <p><a href="/logout">Logout</a></p>
-  <p><a href="/">Search</a></p>
-  <p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<% else %>
-  <p><a href="/login">Login</a></p>
-  <p><a href="/users/new">Register</a></p>
-	<p><a href="/">Search</a></p>
-<% end %>
-
-<h1><%= @user.username %></h1>
-<p><h3><%= @user.name %></h3></p>
-<p><h3>Tags:</h3></p>
-<h4>
-  <% tags = [] %>
-  <% @user.tags.each do |tag| %>
-  <% tags << tag.name %>
+<nav>
+  <% if logged_in? %>
+    <button class="btn right"><a href="/logout">Logout</a></button>
+    <button class="btn left"><a href="/">Search</a></button>
+    <button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+  <% else %>
+    <button class="btn left"><a href="/login">Login</a></button>
+    <button class="btn left"><a href="/users/new">Register</a></button>
+  	<button class="btn left"><a href="/">Search</a></button>
   <% end %>
-  <%= tags.join(", ") %>
-</h4>
+</nav>
+<br />
+
+<div class="center">
+  <h1><%= @user.username %></h1>
+  <p><h3><%= @user.name %></h3></p>
+  <p><h3>Tags:</h3></p>
+  <h4>
+    <% tags = [] %>
+    <% @user.tags.each do |tag| %>
+    <% tags << tag.name %>
+    <% end %>
+    <%= tags.join(", ") %>
+  </h4>
+</div>
 
 <!-- <form action="/users/<%= @user.id %>/ratings" method="post">
   <input name="star1" type="radio" class="star-off"/> 

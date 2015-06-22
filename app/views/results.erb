@@ -1,22 +1,27 @@
-<% if logged_in? %>
-  <h4>Welcome back <%= current_user.name %></h4>
-  <p><a href="/users/<%= current_user.id %>">Profile</a></p>
-  <p><a href="/logout">Logout</a></p>
-  <p><a href="/">Search</a></p>
-<% else %>
-  <p><a href="/login">Login</a></p>
-  <p><a href="/users/new">Register</a></p>
-<% end %>
+<nav>
+  <% if logged_in? %>
+    <button class="btn right"><a href="/logout">Logout</a></button>
+    <button class="btn left"><a href="/">Search</a></button>
+    <button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+  <% else %>
+    <button class="btn left"><a href="/login">Login</a></button>
+    <button class="btn left"><a href="/users/new">Register</a></button>
+  	<button class="btn left"><a href="/">Search</a></button>
+  <% end %>
+</nav>
+<br />
 
-<h1>RESULTS:</h1>
-<% if !logged_in? %>
-<% @users.each do |user| %>
-		<p><a href="/users/<%= user.id %>"><%= user.username %></a></p>
-	<% end %>
-<% else %>
+<div class="results">
+	<h1>RESULTS:</h1>
+	<% if !logged_in? %>
 	<% @users.each do |user| %>
-		<% if user.id != current_user.id %>
 			<p><a href="/users/<%= user.id %>"><%= user.username %></a></p>
 		<% end %>
+	<% else %>
+		<% @users.each do |user| %>
+			<% if user.id != current_user.id %>
+				<p><a href="/users/<%= user.id %>"><%= user.username %></a></p>
+			<% end %>
+		<% end %>
 	<% end %>
-<% end %>
+</div>
