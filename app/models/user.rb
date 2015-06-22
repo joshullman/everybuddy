@@ -61,6 +61,20 @@ class User < ActiveRecord::Base
 
   ##########################################################################
 
+
+  has_many :posted_events, class_name: "Event", source: :user_one, foreign_key: "user_one_id"
+  has_many :accepted_events, class_name: "Event", source: :user_two, foreign_key: "user_two_id"
+
+  def events
+    Event.where("events.posted_events = #{self.id} OR events.accepted_events = #{self.id}").order(created_at: :desc)
+  end
+
+  def events_with(id)
+    Event.where("events.posted_events = #{self.id} AND events.accepted_events = #{id} OR 
+                 events.posted_events = #{id} AND events.accepted_events = #{self.id}").order(created_at: :desc)
+  end
+
+  ##########################################################################
   def password
     @password ||= Password.new(password_hash)
   end
