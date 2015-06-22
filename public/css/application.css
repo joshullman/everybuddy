@@ -31,6 +31,10 @@ th {
   text-align: left;
 }
 
+body {
+  margin: 2%;
+}
+
 /*.star-off { 
 	background-color: #FFFFFF;
 	width: 10px;

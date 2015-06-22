@@ -42,7 +42,6 @@
 
 <% if logged_in? && @user.id == current_user.id %>
   <form action="/users/<%=current_user.id%>/edit" method="get">
-    <input type="hidden" name="_method" value="put">
     <input type="submit" value="Edit Profile">
   </form>
   <p><a href="/tags">Show Tags</a></p>

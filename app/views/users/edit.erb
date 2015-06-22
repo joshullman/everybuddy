@@ -5,25 +5,25 @@
 <div class="center">
   <h3>Edit your Profile:</h3>
 
-  <h4><form action="/users" method="post">
+  <h4><form action="/users/<%= @user.id %>" method="post">
     <input type="hidden" name="_method" value="put">
 
     <h3>Name:</h3>
-    <input type="text" name="name" value="<%= @user.name %>">
+    <input type="text" name="user[name]" value="<%= @user.name %>">
     <br/>
 
     <h3>Gender:</h3>
-    <input type="text" name="gender" value="<%= @user.gender %>" />
+    <input type="text" name="user[gender]" value="<%= @user.gender %>" />
     <br/>
 
     <h3>Email:</h3>
-    <input type="text" name="email" value="<%= @user.email %>" />
+    <input type="text" name="user[email]" value="<%= @user.email %>" />
     <br/>
 
     <input type="submit" value="Update Profile">
   </form>
 
-  <form action="/users/<%=current_user.id%>" method="post" >
+  <form action="/users/<%= @user.id %>" method="post" >
     <input type="hidden" name="_method" value="delete" />
     <input type="submit" value="Delete Profile" />
   </form></h4>

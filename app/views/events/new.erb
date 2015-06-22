@@ -1,19 +1,20 @@
-<button class="btn left"><a href="/">Back</a></button>
+<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+<button class="btn left"><a href="/events">Events</a></button>
 <button class="btn right"><a href="/logout">Logout</a></button>
 <br>
 
 <div class="center">
-  <form action="/events/new" method="post">
+  <form action="/events" method="post">
     <h3>Name</h3>
-    <input type="text" name="name" />
+    <input type="text" name="event[name]" />
     <br>
 
     <h3>Time</h3>
-    <input type="text" name="time" />
+    <input type="text" name="event[time]" />
     <br>
 
     <h3>Location</h3>
-    <input type="text" name="location" />
+    <input type="text" name="event[location]" />
     <br>
 
     <input type="submit" value="Create Event">

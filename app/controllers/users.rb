@@ -41,11 +41,12 @@ end
 #update
 put "/users/:id" do
   @user = User.find(session[:user_id])
+  @user.assign_attributes(params[:user])
   if @user.save
-    redirect "/categories/#{@user.category_id}/articles/#{@user.id}"
+    redirect "/users/#{@user.id}"
   else
     status 401
-    erb :"articles/edit"
+    erb :"users/edit"
   end
 end
 

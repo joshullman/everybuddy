@@ -12,13 +12,9 @@ get	"/events/new" do
 end
 
 #create
-post	"/events" do
-	@event = Event.new(
-		poster: current_user.id, 
-		name: params[:name],
-		time: params[:time],
-		place: params[:place]
-		)
+post "/events" do
+	@event = Event.new(poster: current_user.id)
+	@event.assign_attributes(params[:event])
 	if @event.save
 		redirect "/events/#{@event.id}"
 	else
@@ -47,6 +43,7 @@ end
 #update
 put "/events/:event_id" do
   @event = Event.find(params[:event_id])
+  @event.assign_attributes(params[:event])
   if @event.save
     redirect "/events/#{@event.id}"
   else
