@@ -1,6 +1,6 @@
 #all
-get	"/events" do
-	@events = current_user.events
+get	"users/:user_id/events" do
+	@events = User.find(:user_id).events
 	erb :"events/index"
 end
 
