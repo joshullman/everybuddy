@@ -62,8 +62,8 @@ class User < ActiveRecord::Base
   ##########################################################################
 
 
-  has_many :posted_events, class_name: "Event", source: :user_one, foreign_key: "user_one_id"
-  has_many :accepted_events, class_name: "Event", source: :user_two, foreign_key: "user_two_id"
+  has_many :posted_events, class_name: "Event", source: :user_one, foreign_key: "poster"
+  has_many :accepted_events, class_name: "Event", source: :user_two, foreign_key: "buddy"
 
   def events
     Event.where("events.posted_events = #{self.id} OR events.accepted_events = #{self.id}").order(created_at: :desc)

@@ -51,6 +51,7 @@
   <p><a href="/buddies">Your Buddies</a></p>
   <p><a href="/buddies/pending">Pending Buddies</a></p>
   <p><a href="/buddies/requests">Buddy Requests</a></p>
+  <p><a href="/events">Events</a></p>
 <% elsif logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%=@user.id%>/conversations/new">New Message</a></p>
 <% end %>

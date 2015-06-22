@@ -1,0 +1,22 @@
+<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+<button class="btn right"><a href="/logout">Logout</a></button>
+</br>
+
+<div>
+  <h3><%= current_user.username %>'s Events:</h3>
+  <% @events.each do |event| %>
+    <p>
+      <a href="/events/<%= event.id %>"><%= event.name %></a>
+      <br>
+      <%= event.time %>
+      <br>
+      <%= event.location%>
+      <% if current_user %>
+        <form action="/events/<%= event.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Delete Event">
+        </form>
+      <% end %>
+    </p>
+  <% end %>
+</div>

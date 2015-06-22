@@ -1,8 +1,8 @@
 class CreateEvents < ActiveRecord::Migration
   def change
   	create_table :events do |t|
-      t.integer  :user_one_id
-      t.integer  :user_two_id
+      t.integer  :poster
+      t.integer  :buddy
       t.string   :name
       t.string   :time
       t.string   :location

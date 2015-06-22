@@ -40,16 +40,14 @@ end
 # #destroy
 delete	"/buddies/:buddy_id/delete" do
   @buddy_rel = BuddyRelationship.where(user_id: params[:buddy_id], buddy_id: current_user.id).first || 
-           BuddyRelationship.where(user_id: current_user.id, buddy_id: params[:buddy_id]).first
+               BuddyRelationship.where(user_id: current_user.id, buddy_id: params[:buddy_id]).first
   @buddy_rel.destroy
-  p "Removed Buddy"
   redirect "/buddies"
 end
 
 delete  "/buddies/:buddy_id" do
   @buddy_rel = BuddyRelationship.where(user_id: params[:buddy_id], buddy_id: current_user.id).first || 
-           BuddyRelationship.where(user_id: current_user.id, buddy_id: params[:buddy_id]).first
+               BuddyRelationship.where(user_id: current_user.id, buddy_id: params[:buddy_id]).first
   @buddy_rel.destroy
-  p "Removed Buddy"
   redirect "/buddies/requests"
 end

@@ -1,0 +1,30 @@
+<button class="btn left"><a href="/users/<%= current_user.id %>">Profile</a></button>
+<button class="btn right"><a href="/logout">Logout</a></button>
+<br>
+
+<div class="center">
+  <h3>Edit your Event:</h3>
+
+  <h4><form action="/event" method="post">
+    <input type="hidden" name="_method" value="put">
+
+    <h3>Name:</h3>
+    <input type="text" name="name" value="<%= @event.name %>">
+    <br/>
+
+    <h3>Time:</h3>
+    <input type="text" name="time" value="<%= @event.time %>" />
+    <br/>
+
+    <h3>Location:</h3>
+    <input type="text" name="location" value="<%= @event.location %>" />
+    <br/>
+
+    <input type="submit" value="Update Event">
+  </form>
+
+  <form action="/event/<%=@event.id%>" method="post" >
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" value="Delete Event" />
+  </form></h4>
+</div>
