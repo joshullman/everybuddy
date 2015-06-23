@@ -103,8 +103,8 @@ end
 	b = (1 + rand(33))
 	c = (rand(2))
 	c == 1 ? c = true : c = false
-	if a != b && !Event.where(poster: a, buddy: b).first && !Event.where(poster: b, buddy: a).first
-		Event.create(poster: a, buddy: b, name: "WANNA HANG OOT?", time: "TOMORROW", location: "DBC", is_private: c)
+	if a != b && !Event.where(poster_id: a, receiver_id: b).first && !Event.where(poster_id: b, receiver_id: a).first
+		Event.create(poster_id: a, receiver_id: b, name: "WANNA HANG OOT?", time: "TOMORROW", location: "DBC", is_private: c)
 	end
 end
 
@@ -113,15 +113,15 @@ end
 	b = (1 + rand(33))
 	c = (rand(2))
 	c == 1 ? c = true : c = false
-	if a != b && !Event.where(poster: a, buddy: b).first && !Event.where(poster: b, buddy: a).first
-		Event.create(poster: a, buddy: b, name: "CONFIRMED HANG SESH BRUH", time: "TOMORROW", location: "DBC", is_private: c, accepted: true)
+	if a != b && !Event.where(poster_id: a, receiver_id: b).first && !Event.where(poster_id: b, receiver_id: a).first
+		Event.create(poster_id: a, receiver_id: b, name: "CONFIRMED HANG SESH BRUH", time: "TOMORROW", location: "DBC", is_private: c, accepted: true)
 	end
 end
 
 
 40.times do
 	a = (1 + rand(33))
-	Event.create(poster: a, name: "I AM SO LONELY", time: "TOMORROW", location: "DBC", is_private: false)
+	Event.create(poster_id: a, name: "I AM SO LONELY", time: "TOMORROW", location: "DBC", is_private: false)
 end
 
 

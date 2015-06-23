@@ -22,8 +22,8 @@
         Accepted: <%= event.accepted %>
         <br>
         With:
-        <% if event.buddy != 0 %>
-        <%= User.find(event.poster).id == @user.id ? User.find(event.buddy).username : User.find(event.poster).username %>
+        <% if event.receiver_id != 0 %>
+        <%= event.poster.id == @user.id ? event.receiver.username : event.poster.username %>
         <% end %>
       </p>
     <% end %>
@@ -39,8 +39,8 @@
         Accepted: <%= event.accepted %>
         <br>
         With: 
-        <% if event.buddy %>
-          <% User.find(event.poster).id == current_user.id ? buddy = User.find(event.buddy) : buddy = User.find(event.poster) %>
+        <% if event.receiver_id != 0%>
+          <% event.poster.id == current_user.id ? buddy = event.receiver : buddy = event.poster %>
           <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
         <% end %>
 

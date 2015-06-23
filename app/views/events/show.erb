@@ -13,13 +13,13 @@
 	<% end %>
 	<h4>Hanging out with: 
 	<% if current_user.id == @user.id %>
-		<%= User.find(@event.poster).id == current_user.id ? User.find(@event.buddy).username : User.find(@event.poster).username %></h4>
-	<% elsif @event.buddy == 0 %>
+		<%= @event.poster.id == current_user.id ? @event.receiver.username : @event.poster.username %></h4>
+	<% elsif @event.receiver_id == 0 %>
 		<form action="/events/<%= @event.id %>/accept" method="post">
     	<input type="submit" value="Count Me In!">
   	</form>
 	<% else %>
-		<%= User.find(@event.poster).id == @user.id ? User.find(@event.buddy).username : User.find(@event.poster).username %></h4>
+		<%= @event.poster.id == @user.id ? @event.receiver.username : @event.poster.username %></h4>
 	<% end %>
 	<br>
 

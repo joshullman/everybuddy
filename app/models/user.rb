@@ -62,42 +62,42 @@ class User < ActiveRecord::Base
   ##########################################################################
 
 
-  has_many :posted_events, class_name: "Event", source: :user_one, foreign_key: "poster"
-  has_many :accepted_events, class_name: "Event", source: :user_two, foreign_key: "buddy"
+  has_many :posted_events, class_name: "Event", source: :user_one, foreign_key: "poster_id"
+  has_many :accepted_events, class_name: "Event", source: :user_two, foreign_key: "receiver_id"
 
   def events
-    Event.where("events.poster = #{self.id} OR events.buddy = #{self.id}").order(created_at: :desc)
+    Event.where("events.poster_id = #{self.id} OR events.receiver_id = #{self.id}").order(created_at: :desc)
   end
 
   def events_with(id)
-    Event.where("events.poster = #{self.id} AND events.buddy = #{id} OR 
-                 events.poster = #{id} AND events.buddy = #{self.id}").order(created_at: :desc)
+    Event.where("events.poster_id = #{self.id} AND events.receiver_id = #{id} OR 
+                 events.poster_id = #{id} AND events.receiver_id = #{self.id}").order(created_at: :desc)
   end
 
   def public_events
-    Event.where("events.poster = #{self.id} AND events.is_private = false OR 
-                 events.buddy = #{self.id} AND events.is_private = false").order(created_at: :desc)
+    Event.where("events.poster_id = #{self.id} AND events.is_private = false OR 
+                 events.receiver_id = #{self.id} AND events.is_private = false").order(created_at: :desc)
   end
 
   def private_events
-    Event.where("events.poster = #{self.id} AND events.is_private = true OR 
-                 events.buddy = #{self.id} AND events.is_private = true").order(created_at: :desc)
+    Event.where("events.poster_id = #{self.id} AND events.is_private = true OR 
+                 events.receiver_id = #{self.id} AND events.is_private = true").order(created_at: :desc)
   end
 
   def solo_events
-    Event.where("events.poster = #{self.id} AND events.buddy = 0 AND events.accepted = false")
+    Event.where("events.poster_id = #{self.id} AND events.receiver_id = 0 AND events.accepted = false")
   end
 
   def accepted_events
-    Event.where("(events.poster = #{self.id} OR events.buddy = #{self.id}) AND events.accepted = true")
+    Event.where("(events.poster_id = #{self.id} OR events.receiver_id = #{self.id}) AND events.accepted = true")
   end
 
   def pending_events
-    Event.where("events.poster = #{self.id} AND events.accepted = false")
+    Event.where("events.poster_id = #{self.id} AND events.accepted = false")
   end
 
   def event_requests
-    Event.where("events.buddy = #{self.id} AND events.accepted = false")
+    Event.where("events.receiver_id = #{self.id} AND events.accepted = false")
   end
 
   ##########################################################################

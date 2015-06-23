@@ -43,7 +43,7 @@ end
 #request to join someone else's event
 post "/events/:event_id/accept" do
   @event = Event.find(params[:event_id])
-  @event.update_attributes(buddy: @event.poster, poster: current_user.id)
+  @event.update_attributes(receiver_id: @event.poster_id, poster_id: current_user.id)
   redirect "/users/#{current_user.id}/events"
 end
 
