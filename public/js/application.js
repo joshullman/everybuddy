@@ -5,44 +5,49 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 
-  $('').on('submit', function(event) {
-    event.preventDefault();
-    var $form = $(event.target);
+  // $('nav').on('submit', function(event) {
+    
+    
+  // })
 
-    $.ajax({
-      url: $form.attr('action'),
-      type: $form.attr('method'),
-      data: $form.serialize()
-    }).done(function (response){
-      $form.closest('li').remove();
-    }).fail(function (response) {
-      $submit_input.val("Failed, retry?")
-    }) 
+  // $('').on('submit', function(event) {
+  //   event.preventDefault();
+  //   var $form = $(event.target);
 
-  })
+  //   $.ajax({
+  //     url: $form.attr('action'),
+  //     type: $form.attr('method'),
+  //     data: $form.serialize()
+  //   }).done(function (response){
+  //     $form.closest('li').remove();
+  //   }).fail(function (response) {
+  //     $submit_input.val("Failed, retry?")
+  //   }) 
 
-
-  $('').on('submit', function(event) {
-    event.preventDefault();
-    var $form = $(event.target);
-    var $submit_input = $form.children('input[type=submit]')
-
-    $submit_input.val("Deleting...");
-
-    $.ajax({
-      url: $form.attr('action'),
-      type: 'DELETE'
-
-    }).done(function (response){
-      $form.closest('li').remove();
-    }).fail(function (response) {
-      $submit_input.val("Failed, retry?")
-    }) 
-
-  });
+  // })
 
 
-  starFun();
+  // $('').on('submit', function(event) {
+  //   event.preventDefault();
+  //   var $form = $(event.target);
+  //   var $submit_input = $form.children('input[type=submit]')
+
+  //   $submit_input.val("Deleting...");
+
+  //   $.ajax({
+  //     url: $form.attr('action'),
+  //     type: 'DELETE'
+
+  //   }).done(function (response){
+  //     $form.closest('li').remove();
+  //   }).fail(function (response) {
+  //     $submit_input.val("Failed, retry?")
+  //   }) 
+
+  // });
+
+
+  // starFun();
 
 });
 

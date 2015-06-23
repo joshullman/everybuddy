@@ -14,7 +14,7 @@ User.create(name: "Alex Kass", gender: "M", email: "m@aol.com", username: "Kassa
 User.create(name: "Patrick Betti", gender: "M", email: "n@aol.com", username: "Scoobs", password: "password")
 User.create(name: "Jeff Chang", gender: "M", email: "o@aol.com", username: "Chefe", password: "password")
 User.create(name: "Andrew Donato", gender: "M", email: "p@aol.com", username: "TheAdmiral", password: "password")
-User.create(name: "Jennifer Jaochico", gender: "M", email: "q@aol.com", username: "Jenga", password: "password")
+User.create(name: "Jennifer Jaochico", gender: "F", email: "q@aol.com", username: "Jenga", password: "password")
 User.create(name: "Ian Harris", gender: "M", email: "r@aol.com", username: "Banner", password: "password")
 User.create(name: "Brian Kennedy", gender: "M", email: "s@aol.com", username: "BigKahuna", password: "password")
 User.create(name: "Benoit Demonsant", gender: "M", email: "t@aol.com", username: "BennyAndTheJets", password: "password")
