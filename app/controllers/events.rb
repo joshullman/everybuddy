@@ -1,7 +1,12 @@
 #all
 get	"/users/:user_id/events" do
-	@user = User.find(params[:user_id])
-	@events = @user.events
+  if current_user.id == params[:user_id] 
+  	@user = current_user
+  	@events = current_user.events
+  else
+    @user = User.find(params[:user_id])
+    @events = @user.pending_events.where(buddy: nil) + @user.accepted_events
+  end
 	erb :"events/index"
 end
 
@@ -35,23 +40,29 @@ post "/events/:event_id/new" do
   end
 end
 
+post "/events/:event_id/accept" do
+  @event = Event.find(params[:event_id])
+  @event.update_attributes(buddy: current_user.id, accepted: true)
+  redirect "/users/#{current_user.id}/events"
+end
+
 #create
 post "/events" do
-	@event = Event.new(poster: current_user.id)
-	@event.assign_attributes(params[:event])
-	if @event.save
-		redirect "/users/#{current_user.id}/events/#{@event.id}"
-	else
-		status 400
+  @event = Event.new(poster: current_user.id)
+  @event.assign_attributes(params[:event])
+  if @event.save
+    redirect "/users/#{current_user.id}/events/#{@event.id}"
+  else
+    status 400
     erb :"events/new"
   end
 end
 
 #show
-get	"/users/:user_id/events/:event_id" do
-	@user = User.find(params[:user_id])
-	@event = Event.find(params[:event_id])
-	erb :"events/show"
+get "/users/:user_id/events/:event_id" do
+  @user = User.find(params[:user_id])
+  @event = Event.find(params[:event_id])
+  erb :"events/show"
 end
 
 #edit
@@ -79,14 +90,14 @@ end
 
 # #delete
 delete "/events/:event_id/delete" do
-	@event = Event.find(params[:event_id])
-	  if @event
-	    @event.destroy
-	  else
-	    status 404
-	    "Event not found"
-	  end
-	  redirect "/users/#{current_user.id}/events"
+  @event = Event.find(params[:event_id])
+    if @event
+      @event.destroy
+    else
+      status 404
+      "Event not found"
+    end
+    redirect "/users/#{current_user.id}/events"
 end
 
 delete  "/events/:event_id" do

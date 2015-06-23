@@ -4,18 +4,27 @@
 	<h3><%= @event.name %>:</h3>
 	<h4><%= @event.time %></h4>
 	<h4><%= @event.location %></h4>
+	<h4>Accepted: <%= @event.accepted %></h4>
 	<% if @event.is_private == true %>
 		<h4>Private Event</h4>
 	<% else %>
 		<h4>Public Event</h4>
     
 	<% end %>
-	<h4>Hanging out with: <%= User.find(@event.poster).id == current_user.id ? User.find(@event.buddy).username : User.find(@event.poster).username %></h4>
+	<h4>Hanging out with: 
+	<% if current_user.id == @user.id %>
+		<%= User.find(@event.poster).id == current_user.id ? User.find(@event.buddy).username : User.find(@event.poster).username %></h4>
+	<% elsif @event.buddy == nil %>
+		<form action="/events/<%= @event.id %>/accept" method="post">
+    	<input type="submit" value="Count Me In!">
+  	</form>
+	<% else %>
+		<%= User.find(@event.poster).id == @user.id ? User.find(@event.buddy).username : User.find(@event.poster).username %></h4>
+	<% end %>
 	<br>
+
   <% if current_user.id == @user.id %>
-	<form action="/events/<%= @event.id %>/edit" method="get">
-    <input type="submit" value="Edit Event">
-  </form>
+	<a href="/events/<%= @event.id %>/edit">Edit Event</a>
   <form action="/events/<%= @event.id %>/delete" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Event">
