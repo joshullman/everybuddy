@@ -1,0 +1,37 @@
+<%= erb :_nav_bar, layout: false %>
+
+<div class="center">
+  <h3>Edit your Event:</h3>
+
+  <h4><form action="/events/<%= @event.id %>" method="post">
+
+    <h3>Name:</h3>
+    <input type="text" name="event[name]" value="<%= @event.name %>">
+    <br/>
+
+    <h3>Time:</h3>
+    <input type="text" name="event[time]" value="<%= @event.time %>" />
+    <br/>
+
+    <h3>Location:</h3>
+    <input type="text" name="event[location]" value="<%= @event.location %>" />
+    <br/>
+
+    <% if @event.is_private %>
+      <h3>Public?</h3>
+      <input type="radio" name="event[is_private]" value="false" />
+    <% else %>
+      <h3>Private?</h3>
+      <input type="radio" name="event[is_private]" value="true" />
+    <% end %>
+    <br/>
+
+    <input type="hidden" name="_method" value="put">
+    <input type="submit" value="Update Event">
+  </form>
+
+  <form action="/events/<%= @event.id %>" method="post" >
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" value="Delete Event" />
+  </form></h4>
+</div>

@@ -32,19 +32,17 @@ class User < ActiveRecord::Base
   has_many :buddies, :through => :buddy_relationships
 
   def accepted_buddies
-    id = self.id
-    buddy_rels = BuddyRelationship.where("(buddy_relationships.user_id = #{id} OR buddy_relationships.buddy_id = #{id}) AND buddy_relationships.accepted = true")
+    buddy_rels = BuddyRelationship.where("(buddy_relationships.user_id = #{self.id} OR buddy_relationships.buddy_id = #{self.id}) AND buddy_relationships.accepted = true")
     accepted_buddies = []
     buddy_rels.each do |buddy_rel|
-      accepted_buddies << User.find(buddy_rel.user_id) if id != User.find(buddy_rel.user_id).id
-      accepted_buddies << User.find(buddy_rel.buddy_id) if id != User.find(buddy_rel.buddy_id).id
+      accepted_buddies << User.find(buddy_rel.user_id) if self.id != User.find(buddy_rel.user_id).id
+      accepted_buddies << User.find(buddy_rel.buddy_id) if self.id != User.find(buddy_rel.buddy_id).id
     end
     return accepted_buddies
   end
 
   def pending_buddies
-    id = self.id
-    buddy_rels = BuddyRelationship.where("buddy_relationships.user_id = #{id} AND buddy_relationships.accepted = false")
+    buddy_rels = BuddyRelationship.where("buddy_relationships.user_id = #{self.id} AND buddy_relationships.accepted = false")
     pending_buddies = []
     buddy_rels.each do |buddy_rel|
       pending_buddies << User.find(buddy_rel.buddy_id)
@@ -53,8 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def buddy_requests
-    id = self.id
-    buddy_rels = BuddyRelationship.where("buddy_relationships.buddy_id = #{id} AND buddy_relationships.accepted = false")
+    buddy_rels = BuddyRelationship.where("buddy_relationships.buddy_id = #{self.id} AND buddy_relationships.accepted = false")
     buddy_requests = []
     buddy_rels.each do |buddy_rel|
       buddy_requests << User.find(buddy_rel.user_id)
@@ -64,6 +61,46 @@ class User < ActiveRecord::Base
 
   ##########################################################################
 
+
+  has_many :posted_events, class_name: "Event", source: :user_one, foreign_key: "poster_id"
+  has_many :accepted_events, class_name: "Event", source: :user_two, foreign_key: "receiver_id"
+
+  def events
+    Event.where("events.poster_id = #{self.id} OR events.receiver_id = #{self.id}").order(created_at: :desc)
+  end
+
+  def events_with(id)
+    Event.where("events.poster_id = #{self.id} AND events.receiver_id = #{id} OR 
+                 events.poster_id = #{id} AND events.receiver_id = #{self.id}").order(created_at: :desc)
+  end
+
+  def public_events
+    Event.where("events.poster_id = #{self.id} AND events.is_private = false OR 
+                 events.receiver_id = #{self.id} AND events.is_private = false").order(created_at: :desc)
+  end
+
+  def private_events
+    Event.where("events.poster_id = #{self.id} AND events.is_private = true OR 
+                 events.receiver_id = #{self.id} AND events.is_private = true").order(created_at: :desc)
+  end
+
+  def solo_events
+    Event.where("events.poster_id = #{self.id} AND events.receiver_id = 0 AND events.accepted = false")
+  end
+
+  def accepted_events
+    Event.where("(events.poster_id = #{self.id} OR events.receiver_id = #{self.id}) AND events.accepted = true")
+  end
+
+  def pending_events
+    Event.where("events.poster_id = #{self.id} AND events.accepted = false")
+  end
+
+  def event_requests
+    Event.where("events.receiver_id = #{self.id} AND events.accepted = false")
+  end
+
+  ##########################################################################
   def password
     @password ||= Password.new(password_hash)
   end

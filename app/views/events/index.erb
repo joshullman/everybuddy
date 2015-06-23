@@ -1,0 +1,62 @@
+<%= erb :_nav_bar, layout: false %>
+
+<div>
+
+<% if @user.id != current_user.id %>
+  <p><a href="/events/new">New Event with <%= @user.username %></a></p>
+<% else %>
+  <p><a href="/events/new">New Event</a></p>
+<% end %>
+
+  <h3><%= @user.username %>'s Events:</h3>
+  <% @events.each do |event| %>
+
+    <% if @user.id != current_user.id && event.is_private == false %>
+      <p>
+        <a href="/users/<%= @user.id %>/events/<%= event.id %>"><%= event.name %></a>
+        <br>
+        <%= event.time %>
+        <br>
+        <%= event.location%>
+        <br>
+        Accepted: <%= event.accepted %>
+        <br>
+        With:
+        <% if event.receiver_id != 0 %>
+        <%= event.poster.id == @user.id ? event.receiver.username : event.poster.username %>
+        <% end %>
+      </p>
+    <% end %>
+
+    <% if @user.id == current_user.id && event.accepted == true %>
+      <p>
+        <a href="/users/<%= @user.id %>/events/<%= event.id %>"><%= event.name %></a>
+        <br>
+        <%= event.time %>
+        <br>
+        <%= event.location%>
+        <br>
+        Accepted: <%= event.accepted %>
+        <br>
+        With: 
+        <% if event.receiver_id != 0%>
+          <% event.poster.id == current_user.id ? buddy = event.receiver : buddy = event.poster %>
+          <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
+        <% end %>
+
+        <% if event.is_private == true %>
+          <h3>Private Event</h3>
+        <% else %>
+          <h3>Public Event</h3>
+        <% end %>
+
+        <form action="/events/<%= event.id %>/delete" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Delete Event">
+        </form>
+        
+      </p>
+    <% end %>
+
+  <% end %>
+</div>

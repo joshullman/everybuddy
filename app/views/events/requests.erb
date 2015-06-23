@@ -1,0 +1,26 @@
+<%= erb :_nav_bar, layout: false %>
+
+<div>
+  <h3><%= current_user.username %>'s Event Requests:</h3>
+  <% @events.each do |event| %>
+      <% user = event.poster %>
+      <a href="/users/<%= user.id %>"><%= user.username %></a>
+      <br/>
+      <a href="/users/<%= user.id %>/events/<%= event.id %>"><%= event.name %></a>
+      <br/>
+      <%= event.time %>
+      <br/>
+      <%= event.location %>
+      <br/>
+      <% if current_user %>
+      	<form action="/events/<%= event.id %>/new" method="post">
+	        <input type="submit" value="Add Event">
+        </form>
+        <form action="/events/<%= event.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Ignore Event">
+        </form>
+      <br/>
+      <% end %>
+  <% end %>
+</div>

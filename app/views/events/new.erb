@@ -1,0 +1,29 @@
+<%= erb :_nav_bar, layout: false %>
+
+<div class="center">
+  <form action="/events" method="post">
+    <h3>Name</h3>
+    <input type="text" name="event[name]" />
+    <br>
+
+    <h3>Time</h3>
+    <input type="text" name="event[time]" />
+    <br>
+
+    <h3>Location</h3>
+    <input type="text" name="event[location]" />
+    <br>
+
+    <h3>Private?</h3>
+    <input type="radio" name="event[is_private]" value="true" />
+    <br/>
+
+    <% if @user.id != current_user.id %>
+      
+    <% else %>
+      
+    <% end %>
+
+    <input type="submit" value="Create Event">
+  </form>
+</div>

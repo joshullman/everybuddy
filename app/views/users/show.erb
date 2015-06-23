@@ -1,41 +1,37 @@
-<% if logged_in? %>
-  <p><a href="/logout">Logout</a></p>
-  <p><a href="/">Search</a></p>
-  <p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<% else %>
-  <p><a href="/login">Login</a></p>
-  <p><a href="/users/new">Register</a></p>
-	<p><a href="/">Search</a></p>
-<% end %>
+<%= erb :_nav_bar, layout: false %>
 
-<h1><%= @user.username %></h1>
-<p><h3><%= @user.name %></h3></p>
-<p><h3>Tags:</h3></p>
-<h4>
-  <% tags = [] %>
-  <% @user.tags.each do |tag| %>
-  <% tags << tag.name %>
-  <% end %>
-  <%= tags.join(", ") %>
-</h4>
+<div class="center">
+  <h1><%= @user.username %></h1>
+  <p><h3><%= @user.name %></h3></p>
+  <p><h3>Tags:</h3></p>
+  <h4>
+    <% tags = [] %>
+    <% @user.tags.each do |tag| %>
+    <% tags << tag.name %>
+    <% end %>
+    <%= tags.join(", ") %>
+  </h4>
+</div>
 
-<% if logged_in? && @user.id == current_user.id %>
-  <form action="/users/<%=current_user.id%>/edit" method="get">
-    <input type="hidden" name="_method" value="put">
-    <input type="submit" value="Edit Profile">
-  </form>
-  <form action="/users/<%=current_user.id%>" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete User">
-  </form>
-  <p><a href="/tags">Show Tags</a></p>
-  <p><a href="/tags/new">Add Tags</a></p>
-  <p><a href="/conversations">Show Conversations</a></p>
-  <p><a href="/users/<%=current_user.id%>/buddies">Your Buddies</a></p>
-  <p><a href="/users/<%=current_user.id%>/buddies/pending">Pending Buddies</a></p>
-  <p><a href="/users/<%=current_user.id%>/buddies/requests">Buddy Requests</a></p>
-<% elsif logged_in? && @user.id != current_user.id %>
-  <p><a href="/users/<%=@user.id%>/conversations/new">New Message</a></p>
+<!-- <form action="/users/<%= @user.id %>/ratings" method="post">
+  <input name="star1" type="radio" class="star-off"/> 
+  <input name="star2" type="radio" class="star-off"/> 
+  <input name="star3" type="radio" class="star-off"/> 
+  <input name="star4" type="radio" class="star-off"/> 
+  <input name="star5" type="radio" class="star-off"/>
+  <div class="star-off" id="1"></div>
+  <div class="star-off" id="2"></div>
+  <div class="star-off" id="3"></div>
+  <div class="star-off" id="4"></div>
+  <div class="star-off" id="5"></div>
+
+  <input type="submit" value="Rate" />
+
+</form> -->
+
+<% if logged_in? && @user.id != current_user.id %>
+  <p><a href="/users/<%= @user.id %>/events"><%= @user.username %>'s Events</a></p>
+  <p><a href="/users/<%= @user.id%>/conversations/new">New Message</a></p>
 <% end %>
 
 <% if logged_in? && @user.id != current_user.id && current_user.pending_buddies.include?(@user)%>
@@ -48,9 +44,9 @@
 <% elsif !logged_in? %>
 <% else %>
   <h3>Already friends!</h3>
-  <form action="/users/<%=current_user.id%>/buddies/<%=@user.id%>" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="Remove Buddy">
+  <form action="/buddies/<%=@user.id%>" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" value="Remove Buddy" />
   </form>
 <% end %>
 

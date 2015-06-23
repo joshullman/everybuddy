@@ -1,0 +1,34 @@
+<%= erb :_nav_bar, layout: false %>
+
+<div>
+	<h3><%= @event.name %>:</h3>
+	<h4><%= @event.time %></h4>
+	<h4><%= @event.location %></h4>
+	<h4>Accepted: <%= @event.accepted %></h4>
+	<% if @event.is_private == true %>
+		<h4>Private Event</h4>
+	<% else %>
+		<h4>Public Event</h4>
+    
+	<% end %>
+	<h4>Hanging out with: 
+	<% if current_user.id == @user.id %>
+		<%= @event.poster.id == current_user.id ? @event.receiver.username : @event.poster.username %></h4>
+	<% elsif @event.receiver_id == 0 %>
+		<form action="/events/<%= @event.id %>/accept" method="post">
+    	<input type="submit" value="Count Me In!">
+  	</form>
+	<% else %>
+		<%= @event.poster.id == @user.id ? @event.receiver.username : @event.poster.username %></h4>
+	<% end %>
+	<br>
+
+  <% if current_user.id == @user.id %>
+	<a href="/events/<%= @event.id %>/edit">Edit Event</a>
+  <form action="/events/<%= @event.id %>/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Event">
+  </form>
+  <% end %>
+</div>
+

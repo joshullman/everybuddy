@@ -14,7 +14,7 @@ User.create(name: "Alex Kass", gender: "M", email: "m@aol.com", username: "Kassa
 User.create(name: "Patrick Betti", gender: "M", email: "n@aol.com", username: "Scoobs", password: "password")
 User.create(name: "Jeff Chang", gender: "M", email: "o@aol.com", username: "Chefe", password: "password")
 User.create(name: "Andrew Donato", gender: "M", email: "p@aol.com", username: "TheAdmiral", password: "password")
-User.create(name: "Jennifer Jaochico", gender: "M", email: "q@aol.com", username: "Jenga", password: "password")
+User.create(name: "Jennifer Jaochico", gender: "F", email: "q@aol.com", username: "Jenga", password: "password")
 User.create(name: "Ian Harris", gender: "M", email: "r@aol.com", username: "Banner", password: "password")
 User.create(name: "Brian Kennedy", gender: "M", email: "s@aol.com", username: "BigKahuna", password: "password")
 User.create(name: "Benoit Demonsant", gender: "M", email: "t@aol.com", username: "BennyAndTheJets", password: "password")
@@ -78,6 +78,8 @@ Message.create(conversation_id: 5, user_id: 1, content: "b^_^d")
   UserTag.create(user_id: a, tag_id: b)
 end
 
+##############################################
+
 40.times do
 	a = (1 + rand(33))
 	b = (1 + rand(33))
@@ -92,6 +94,34 @@ end
 	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first && !BuddyRelationship.where(user_id: b, buddy_id: a).first
 		BuddyRelationship.create(user_id: a, buddy_id: b, accepted: true)
 	end
+end
+
+##############################################
+
+40.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	c = (rand(2))
+	c == 1 ? c = true : c = false
+	if a != b && !Event.where(poster_id: a, receiver_id: b).first && !Event.where(poster_id: b, receiver_id: a).first
+		Event.create(poster_id: a, receiver_id: b, name: "WANNA HANG OOT?", time: "TOMORROW", location: "DBC", is_private: c)
+	end
+end
+
+40.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	c = (rand(2))
+	c == 1 ? c = true : c = false
+	if a != b && !Event.where(poster_id: a, receiver_id: b).first && !Event.where(poster_id: b, receiver_id: a).first
+		Event.create(poster_id: a, receiver_id: b, name: "CONFIRMED HANG SESH BRUH", time: "TOMORROW", location: "DBC", is_private: c, accepted: true)
+	end
+end
+
+
+40.times do
+	a = (1 + rand(33))
+	Event.create(poster_id: a, name: "I AM SO LONELY", time: "TOMORROW", location: "DBC", is_private: false)
 end
 
 

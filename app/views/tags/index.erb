@@ -1,5 +1,7 @@
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<h3>Your Tags:</h3>
+<%= erb :_nav_bar, layout: false %>
+
+<div class="center">
+  <h3>Your Tags:</h3>
   <% @tags.each do |tag| %>
     <p>
       <form action="/results" method="post">
@@ -11,4 +13,6 @@
       </form>
     </p>
   <% end %>
+  <p><a href="/tags/new">Add Tags</a></p>
+</div>
 

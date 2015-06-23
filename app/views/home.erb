@@ -1,17 +1,12 @@
-<% if logged_in? %>
-  <h4>Welcome back <%= current_user.name %></h4>
-  <p><a href="/users/<%= current_user.id %>">Profile</a></p>
-  <p><a href="/logout">Logout</a></p>
-<% else %>
-  <p><a href="/login">Login</a></p>
-  <p><a href="/users/new">Register</a></p>
-<% end %>
+<%= erb :_nav_bar, layout: false %>
 
-<h1>EVERYBUDDY :)</h1>
-<h3>Cuz everyone's looking for a buddy</h3>
+<div class="center">
+	<h1>EVERYBUDDY :)</h1>
+	<h3>Cuz everyone's looking for a buddy</h3>
+	<h4><p>What kind of buddy are you looking for?</p>
+	<form action="/results" method="post">
+	  <input type="text" name="tag" placeholder="BUDDY TIME">
+	  <input type="submit" >
+	</form></h4>
+</div>
 
-<h4><p>What kind of buddy are you looking for?</p>
-<form action="/results" method="post">
-  <input type="text" name="tag" placeholder="BUDDY TIME">
-  <input type="submit" >
-</form></h4>

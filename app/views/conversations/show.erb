@@ -1,16 +1,17 @@
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<p><a href="/conversations">Conversations</a></p>
-<h3>Messages:</h3>
-  <% @messages.each do |message| %>
-  	<p><%= message.created_at %>:</p>
-  	<p><b><%= User.find(message.user_id).username %></b></p>
-    <p>><%= message.content %></p>
-    <br>
-  <% end %>
+<%= erb :_nav_bar, layout: false %>
+<div>
+	<h3>Messages:</h3>
+	  <% @messages.each do |message| %>
+	  	<p><%= message.created_at %>:</p>
+	  	<p><b><%= User.find(message.user_id).username %></b></p>
+	    <p>><%= message.content %></p>
+	    <br>
+	  <% end %>
 
-<form action="/conversations/<%= @conversation.id %>/message" method="post">
-  <label for="message">Message:</label>
-  <input type="text" name="content" value="<%= @new_message.content %>"/>
-  <input type="submit" value="Send">
-</form>
+	<form action="/conversations/<%= @conversation.id %>/message" method="post">
+	  <label for="message">Message:</label>
+	  <input type="text" name="content" value="<%= @new_message.content %>"/>
+	  <input type="submit" value="Send">
+	</form>
+</div>
 

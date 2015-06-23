@@ -1,18 +1,18 @@
-get '/login' do
+get "/login" do
 	erb :login
 end
 
-post '/login' do
+post "/login" do
 	@user = User.find_by(username: params[:username])
 	if @user.password == (params[:password])
 		login(@user)
-		redirect '/'
+		redirect "/"
 	else
 		erb :login
 	end
 end
 
-get '/logout' do
+get "/logout" do
 	logout!
-	redirect '/'
+	redirect "/"
 end

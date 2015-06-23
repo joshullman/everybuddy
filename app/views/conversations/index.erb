@@ -1,5 +1,7 @@
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<h3>Your Conversations:</h3>
+<%= erb :_nav_bar, layout: false %>
+
+<div>
+  <h3>Your Conversations:</h3>
   <% @conversations.each do |conversation| %>
     <% if User.find(conversation.sender).id == current_user.id %>
       <p><%= conversation.created_at %></p>
@@ -25,3 +27,4 @@
       <br>
     <% end %>
   <% end %>
+</div>

@@ -1,14 +1,16 @@
-<p><a href="/users/<%= current_user.id %>">Profile</a></p>
-<h3><%= @user.username %>'s Buddies:</h3>
+<%= erb :_nav_bar, layout: false %>
+
+<div>
+  <h3><%= current_user.username %>'s Buddies:</h3>
   <% @buddies.each do |buddy| %>
     <p>
       <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
       <% if current_user %>
-        <form action="/users/<%=current_user.id%>/buddies/<%= buddy.id %>/delete" method="post">
+        <form action="/buddies/<%= buddy.id %>/delete" method="post">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" value="Delete from Buddies">
         </form>
       <% end %>
     </p>
   <% end %>
-
+</div>

@@ -1,10 +1,10 @@
 #new
-get '/users/new' do
+get "/users/new" do
   erb :"users/new"
 end
 
 #create
-post '/users' do
+post "/users" do
   @user = User.new(params[:user])
   if @user.save
     login(@user)
@@ -17,18 +17,18 @@ post '/users' do
 end
 
 #show
-get '/users/:id' do
+get "/users/:id" do
   @user = User.find_by(id: params[:id])
   if @user
     erb :"users/show"
   else
     status 404
-    redirect '/'
+    redirect "/"
   end
 end
 
 #edit
-get '/users/:id/edit' do
+get "/users/:id/edit" do
   @user = User.find(session[:user_id])
   if @user
     erb :"users/edit"
@@ -39,26 +39,27 @@ get '/users/:id/edit' do
 end
 
 #update
-put '/users/:id' do
+put "/users/:id" do
   @user = User.find(session[:user_id])
+  @user.assign_attributes(params[:user])
   if @user.save
-    redirect "/categories/#{@user.category_id}/articles/#{@user.id}"
+    redirect "/users/#{@user.id}"
   else
     status 401
-    erb :"articles/edit"
+    erb :"users/edit"
   end
 end
 
 #delete
-delete '/users/:id' do
-@user = User.find(params[:id])
-  if @user
-    @user.destroy
-  else
-    status 404
-    "User not found"
-  end
-  redirect "/"
+delete "/users/:id" do
+  @user = User.find(params[:id])
+    if @user
+      @user.destroy
+    else
+      status 404
+      "User not found"
+    end
+    redirect "/"
 end
 
 

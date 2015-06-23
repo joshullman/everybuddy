@@ -1,0 +1,40 @@
+<nav>
+  <% if logged_in? %>
+  <ul>
+    <li>
+      <a href="/users/<%= current_user.id %>">Profile</a>
+      <ul class="dropdown">
+        <li><a href="/users/<%=current_user.id%>/edit">Edit</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </li>
+    
+    <li><a href="/">Search</a></li>
+    <li><a href="/tags">Tags</a></li>
+    <li><a href="/conversations">Convos</a></li>
+
+    <li>
+      <a href="/buddies">Buddies</a>
+      <ul class="dropdown">
+        <li><a href="/buddies/pending">Pending Buddies</a></li>
+        <li><a href="/buddies/requests"><%= current_user.buddy_requests.length %> Buddy Requests</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="/users/<%= current_user.id %>/events">Events</a>
+      <ul class="dropdown">
+        <li><a href="/events/pending">Pending Events</a></li>
+        <li><a href="/events/requests"><%= current_user.event_requests.length %> Event Requests</a></li>
+      </ul>
+    </li>
+  </ul>
+  <% else %>
+  <ul>
+    <li><a href="/login">Login</a></li>
+    <li><a href="/users/new">Register</a></li>
+    <li><a href="/">Search</a></li>
+  </ul>
+  <% end %>
+<nav>
+<br/>
