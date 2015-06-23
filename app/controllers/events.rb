@@ -5,7 +5,7 @@ get	"/users/:user_id/events" do
   	@events = current_user.events
   else
     @user = User.find(params[:user_id])
-    @events = @user.pending_events.where(buddy: nil) + @user.accepted_events
+    @events = @user.accepted_events + @user.solo_events
   end
 	erb :"events/index"
 end
@@ -40,9 +40,10 @@ post "/events/:event_id/new" do
   end
 end
 
+#request to join someone else's event
 post "/events/:event_id/accept" do
   @event = Event.find(params[:event_id])
-  @event.update_attributes(buddy: current_user.id, accepted: true)
+  @event.update_attributes(buddy: @event.poster, poster: current_user.id)
   redirect "/users/#{current_user.id}/events"
 end
 

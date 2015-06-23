@@ -3,7 +3,7 @@
 <div>
 	<h3><%= current_user.username %>'s Pending Events:</h3>
   <% @events.each do |event| %>
-    <% if event.buddy != nil %>
+    <% if event.buddy != 0 %>
       <% user = User.find(event.buddy) %>
     	<a href="/users/<%= user.id %>"><%= user.username %></a>
     	<br/>

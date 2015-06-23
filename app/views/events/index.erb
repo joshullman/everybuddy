@@ -22,7 +22,7 @@
         Accepted: <%= event.accepted %>
         <br>
         With:
-        <% if event.buddy %>
+        <% if event.buddy != 0 %>
         <%= User.find(event.poster).id == @user.id ? User.find(event.buddy).username : User.find(event.poster).username %>
         <% end %>
       </p>
