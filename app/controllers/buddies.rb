@@ -1,21 +1,18 @@
 #all accepted
 get	"/buddies" do
-  @user = User.find(current_user.id)
-  @buddies = @user.accepted_buddies
+  @buddies = current_user.accepted_buddies
 	erb :"buddies/index"
 end
 
 #pending
 get "/buddies/pending" do
-  @user = User.find(current_user.id)
-  @buddies = @user.pending_buddies
+  @buddies = current_user.pending_buddies
   erb :"buddies/pending"
 end
 
 #requests
 get "/buddies/requests" do
-  @user = User.find(current_user.id)
-  @buddies = @user.buddy_requests
+  @buddies = current_user.buddy_requests
   erb :"buddies/requests"
 end
 

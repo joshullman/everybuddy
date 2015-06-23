@@ -78,6 +78,8 @@ Message.create(conversation_id: 5, user_id: 1, content: "b^_^d")
   UserTag.create(user_id: a, tag_id: b)
 end
 
+##############################################
+
 40.times do
 	a = (1 + rand(33))
 	b = (1 + rand(33))
@@ -91,6 +93,28 @@ end
 	b = (1 + rand(33))
 	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first && !BuddyRelationship.where(user_id: b, buddy_id: a).first
 		BuddyRelationship.create(user_id: a, buddy_id: b, accepted: true)
+	end
+end
+
+##############################################
+
+40.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	c = (rand(2))
+	c == 1 ? c = true : c = false
+	if a != b && !Event.where(poster: a, buddy: b).first && !Event.where(poster: b, buddy: a).first
+		Event.create(poster: a, buddy: b, name: "THINGY", time: "TOMORROW", location: "DBC", is_private: c)
+	end
+end
+
+80.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	c = (rand(2))
+	c == 1 ? c = true : c = false
+	if a != b && !Event.where(poster: a, buddy: b).first && !Event.where(poster: b, buddy: a).first
+		Event.create(poster: a, buddy: b, name: "THINGY", time: "TOMORROW", location: "DBC", is_private: c, accepted: true)
 	end
 end
 

@@ -1,1 +1,17 @@
 <%= erb :_nav_bar, layout: false %>
+
+<div>
+	<h3><%= current_user.username %>'s Pending Events:</h3>
+  <% @events.each do |event| %>
+		<% user = User.find(event.buddy) %>
+  	<a href="/users/<%= user.id %>"><%= user.username %></a>
+  	<br/>
+    <a href="/users/<%= current_user.id %>/events/<%= event.id %>"><%= event.name %></a>
+    <br/>
+    <%= event.time %>
+    <br/>
+    <%= event.location %>
+    <br/>
+    <br/>
+  <% end %>
+</div>

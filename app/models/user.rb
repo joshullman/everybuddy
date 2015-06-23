@@ -84,6 +84,18 @@ class User < ActiveRecord::Base
                  events.buddy = #{self.id} AND events.is_private = true").order(created_at: :desc)
   end
 
+  def accepted_events
+    events = Event.where("(events.poster = #{self.id} OR events.buddy = #{self.id}) AND events.accepted = true")
+  end
+
+  def pending_events
+    events = Event.where("events.poster = #{self.id} AND events.accepted = false")
+  end
+
+  def event_requests
+    events = Event.where("events.buddy = #{self.id} AND events.accepted = false")
+  end
+
   ##########################################################################
   def password
     @password ||= Password.new(password_hash)

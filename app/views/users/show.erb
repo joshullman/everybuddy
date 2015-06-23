@@ -33,6 +33,8 @@
   <p><a href="/users/<%=current_user.id%>/edit">Edit Profile</a></p>
   <p><a href="/buddies/pending">Pending Buddies</a></p>
   <p><a href="/buddies/requests">Buddy Requests</a></p>
+  <p><a href="/events/pending">Pending Events</a></p>
+  <p><a href="/events/requests">Event Requests</a></p>
 <% elsif logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%= @user.id %>/events"><%= @user.username %>'s Events</a></p>
   <p><a href="/users/<%= @user.id%>/conversations/new">New Message</a></p>

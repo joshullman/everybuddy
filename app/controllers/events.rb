@@ -5,11 +5,34 @@ get	"/users/:user_id/events" do
 	erb :"events/index"
 end
 
+#pending
+get "/events/pending" do
+  @events = current_user.pending_events
+  erb :"events/pending"
+end
+
+#requests
+get "/events/requests" do
+  @events = current_user.event_requests
+  erb :"events/requests"
+end
+
 #new
 get	"/events/new" do
 	@user = User.find(current_user.id)
   @event = Event.new
   erb :"events/new"
+end
+
+# create/accept new event
+post "/events/:event_id/new" do
+  @event = Event.find(params[:event_id])
+  @event[:accepted] = true
+  if @event.save
+    redirect "/events/requests"
+  else
+    "I GOT AN ERROR D:"
+  end
 end
 
 #create
@@ -55,7 +78,7 @@ put "/events/:event_id" do
 end
 
 # #delete
-delete "/events/:event_id" do
+delete "/events/:event_id/delete" do
 	@event = Event.find(params[:event_id])
 	  if @event
 	    @event.destroy
@@ -64,4 +87,10 @@ delete "/events/:event_id" do
 	    "Event not found"
 	  end
 	  redirect "/users/#{current_user.id}/events"
+end
+
+delete  "/events/:event_id" do
+  @event = Event.find(params[:event_id])
+  @event.destroy
+  redirect "/events/requests"
 end

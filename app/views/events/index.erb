@@ -28,6 +28,8 @@
         <%= event.time %>
         <br>
         <%= event.location%>
+        <br>
+        With: <%= User.find(event.poster).id == current_user.id ? User.find(event.buddy).username : User.find(event.poster).username %>
 
         <% if event.is_private == true %>
           <h3>Private Event</h3>
@@ -35,7 +37,7 @@
           <h3>Public Event</h3>
         <% end %>
 
-        <form action="/events/<%= event.id %>" method="post">
+        <form action="/events/<%= event.id %>/delete" method="post">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" value="Delete Event">
         </form>

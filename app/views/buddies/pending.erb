@@ -1,10 +1,10 @@
 <%= erb :_nav_bar, layout: false %>
 
 <div>
-	<h3><%= @user.username %>'s Pending Buddies:</h3>
+	<h3><%= current_user.username %>'s Pending Buddies:</h3>
   <% @buddies.each do |buddy| %>
     <p>
       <a href="/users/<%= buddy.id %>"><%= buddy.username %></a>
     </p>
   <% end %>
- </div>
+</div>

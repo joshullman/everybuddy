@@ -10,13 +10,13 @@
 		<h4>Public Event</h4>
     
 	<% end %>
-	<h4>Hanging out with: <%= @event.buddy%></h4>
+	<h4>Hanging out with: <%= User.find(@event.poster).id == current_user.id ? User.find(@event.buddy).username : User.find(@event.poster).username %></h4>
 	<br>
   <% if current_user.id == @user.id %>
 	<form action="/events/<%= @event.id %>/edit" method="get">
     <input type="submit" value="Edit Event">
   </form>
-  <form action="/events/<%= @event.id %>" method="post">
+  <form action="/events/<%= @event.id %>/delete" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Event">
   </form>
