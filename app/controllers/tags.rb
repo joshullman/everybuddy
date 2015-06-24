@@ -14,15 +14,15 @@ end
 
 #create
 post "/tags" do
-  @tag = Tag.find_by(name: params[:tag]) || @tag = Tag.new(name: params[:tag])
-  @tag.save
-  @user_tag = UserTag.new(user_id: current_user.id, tag_id: @tag.id)
-  if @user_tag.save
-    @tags = current_user.tags
-    erb :"tags/new"
+  tag = Tag.find_by(name: params[:name]) || tag = Tag.new(name: params[:name])
+  tag.save
+  user_tag = UserTag.new(user_id: current_user.id, tag_id: tag.id)
+  if user_tag.save
+    tags = current_user.tags
+    erb :"tags/_new", locals: {tag: tag}, layout: false
   else
     status 400
-    erb :"tags/new"
+    # erb :"tags/new"
   end
 end
 

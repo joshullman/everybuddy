@@ -6,7 +6,7 @@ post "/login" do
 	@user = User.find_by(username: params[:username])
 	if @user.password == (params[:password])
 		login(@user)
-		redirect "/"
+		redirect "/users/#{current_user.id}"
 	else
 		erb :login
 	end

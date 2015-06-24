@@ -5,46 +5,41 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 
-  // $('nav').on('submit', function(event) {
-    
-    
-  // })
+  $('.new_tag').on('submit', function(event) {
+    event.preventDefault();
+    var $form = $(event.target);
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
 
-  // $('').on('submit', function(event) {
-  //   event.preventDefault();
-  //   var $form = $(event.target);
+    .done(function (response) {
+      $('.tag_list').append(response);
+      $('#tag_form')[0].reset();
+    })
 
-  //   $.ajax({
-  //     url: $form.attr('action'),
-  //     type: $form.attr('method'),
-  //     data: $form.serialize()
-  //   }).done(function (response){
-  //     $form.closest('li').remove();
-  //   }).fail(function (response) {
-  //     $submit_input.val("Failed, retry?")
-  //   }) 
+    .fail(function (response) {
+    })
+  })
 
-  // })
+  $('.new_tag').on('submit', function(event) {
+    event.preventDefault();
+    var $form = $(event.target);
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
 
+    .done(function (response) {
+      $('.tag_list').append(response);
+      $('#tag_form')[0].reset();
+    })
 
-  // $('').on('submit', function(event) {
-  //   event.preventDefault();
-  //   var $form = $(event.target);
-  //   var $submit_input = $form.children('input[type=submit]')
-
-  //   $submit_input.val("Deleting...");
-
-  //   $.ajax({
-  //     url: $form.attr('action'),
-  //     type: 'DELETE'
-
-  //   }).done(function (response){
-  //     $form.closest('li').remove();
-  //   }).fail(function (response) {
-  //     $submit_input.val("Failed, retry?")
-  //   }) 
-
-  // });
+    .fail(function (response) {
+    })
+  })
 
 
   // starFun();
