@@ -28,9 +28,9 @@ end
 
 #delete
 delete "/tags/:tag_id" do
-@user_tag = UserTag.where(user_id: current_user.id, tag_id: params[:tag_id]).first
-  if @user_tag
-    @user_tag.destroy
+  user_tag = UserTag.where(user_id: current_user.id, tag_id: params[:tag_id]).first
+  if user_tag
+    user_tag.destroy
   else
     status 404
     "Tag not found"

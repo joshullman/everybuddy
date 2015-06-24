@@ -23,7 +23,7 @@ $(document).ready(function() {
     })
   })
 
-  $('.new_tag').on('submit', function(event) {
+  $('.tag_wrapper').on('submit', '#delete_tag', function(event) {
     event.preventDefault();
     var $form = $(event.target);
     $.ajax({
@@ -33,8 +33,7 @@ $(document).ready(function() {
     })
 
     .done(function (response) {
-      $('.tag_list').append(response);
-      $('#tag_form')[0].reset();
+      // $('.tag_list').append(response);
     })
 
     .fail(function (response) {
