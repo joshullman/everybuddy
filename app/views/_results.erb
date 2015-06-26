@@ -1,16 +1,11 @@
-<%= erb :_nav_bar, layout: false %>
-
-<div class="results">
-	<h1>RESULTS:</h1>
-	<% if !logged_in? %>
-	<% @users.each do |user| %>
-			<p><a href="/users/<%= user.id %>"><%= user.username %></a></p>
-		<% end %>
-	<% else %>
-		<% @users.each do |user| %>
-			<% if user.id != current_user.id %>
-				<p><a href="/users/<%= user.id %>"><%= user.username %></a></p>
-			<% end %>
-		<% end %>
-	<% end %>
+<div id="<%= event.id %>" class="center">
+	<h3><%= event.name %></h3>
+	<h4><%= event.poster.username %></h4>
+	<h4><%= event.description %></h4>
+	<h4><%= event.time %></h4>
+	<h4><%= event.location %></h4>
+	<h6>Tags: <% event.tags.each do |tag| %>
+		<a href="/results/<%= tag.name %>"><%= tag %></a>
+	<% end %></h6>
+	<br>
 </div>

@@ -3,31 +3,7 @@
 <div class="center">
   <h1><%= @user.username %></h1>
   <p><h3><%= @user.name %></h3></p>
-  <p><h3>Tags:</h3></p>
-  <h4>
-    <% tags = [] %>
-    <% @user.tags.each do |tag| %>
-    <% tags << tag.name %>
-    <% end %>
-    <%= tags.join(", ") %>
-  </h4>
 </div>
-
-<!-- <form action="/users/<%= @user.id %>/ratings" method="post">
-  <input name="star1" type="radio" class="star-off"/> 
-  <input name="star2" type="radio" class="star-off"/> 
-  <input name="star3" type="radio" class="star-off"/> 
-  <input name="star4" type="radio" class="star-off"/> 
-  <input name="star5" type="radio" class="star-off"/>
-  <div class="star-off" id="1"></div>
-  <div class="star-off" id="2"></div>
-  <div class="star-off" id="3"></div>
-  <div class="star-off" id="4"></div>
-  <div class="star-off" id="5"></div>
-
-  <input type="submit" value="Rate" />
-
-</form> -->
 
 <% if logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%= @user.id %>/events"><%= @user.username %>'s Events</a></p>

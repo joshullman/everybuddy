@@ -10,3 +10,11 @@
 	</form></h4>
 </div>
 
+<div class="result_wrapper center">
+  <h1>RESULTS:</h1>
+	  <div class="event_list">
+	    <% @events.each do |event| %>
+	      <%= erb :"_results", layout: false, locals: {event: event} %>
+	    <% end %>
+	  </div>
+</div>
