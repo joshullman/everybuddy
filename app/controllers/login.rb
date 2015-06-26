@@ -3,7 +3,7 @@ get "/login" do
 end
 
 post "/login" do
-	@user = User.find_by(username: params[:username])
+	@user = User.find_by(username: params[:identifier]) || User.find_by(email: params[:identifier])
 	if @user.password == (params[:password])
 		login(@user)
 		redirect "/users/#{current_user.id}"

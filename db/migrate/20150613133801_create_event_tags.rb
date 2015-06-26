@@ -1,6 +1,6 @@
-class CreateUserTags < ActiveRecord::Migration
+class CreateEventTags < ActiveRecord::Migration
   def change
-    create_table :user_tags do |t|
+    create_table :event_tags do |t|
       t.integer  :user_id
       t.integer  :tag_id
 

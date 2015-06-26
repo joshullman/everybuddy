@@ -3,10 +3,10 @@ class CreateEvents < ActiveRecord::Migration
   	create_table :events do |t|
       t.integer  :poster_id
       t.integer  :receiver_id, default: 0
+      t.integer  :tag_id
       t.string   :name
       t.string   :time
       t.string   :location
-      t.float    :rating
       t.boolean  :accepted, default: false
       t.boolean  :is_private, default: false
 

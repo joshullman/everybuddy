@@ -6,6 +6,8 @@ class CreateUsers < ActiveRecord::Migration
 			t.string   :username
 			t.string   :password_hash
 			t.string   :email
+			t.string   :is_private, default: false
+			t.string   :about_me
 
 			t.timestamps
 		end

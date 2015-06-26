@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
   validates :name, uniqueness: true
-  has_many :user_tags
-  has_many :users, -> {distinct}, through: :user_tags
+  
+  has_many :event_tags
+  has_many :events, -> {distinct}, through: :event_tags
 end
