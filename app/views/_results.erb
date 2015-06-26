@@ -1,13 +1,18 @@
-<% @events.each do |event|%> 
-	<div id="<%= event.id %>" class="center">
-		<h3><%= event.name %></h3>
-		<h4><%= event.poster.username %></h4>
-		<h4><%= event.description %></h4>
-		<h4><%= event.time %></h4>
-		<h4><%= event.location %></h4>
-		<h6>Tags: <% event.tags.each do |tag| %>
-			<a href="/results/<%= tag.name %>"><%= tag %></a>
-		<% end %></h6>
-	</div>
-	<br>
-<% end %>
+<div class="results_wrapper center">
+	<h1><%= search_tag.name.upcase %> RESULTS:</h1>
+	<% events.each do |event|%> 
+		<div id="event_post <%= event.id %>" class="center">
+			<h3><%= event.name %></h3>
+			<h4><%= event.poster.username %></h4>
+			<h4><%= event.description %></h4>
+			<h4><%= event.time %></h4>
+			<h4><%= event.location %></h4>
+			<h6>Tags: <% event.tags.each do |tag| %>
+				<form id="new_search" action="/results" method="post">
+				  <input type="button" name="tag" value="<%= tag.name %>" >
+				</form>
+			<% end %></h6>
+		</div>
+		<br>
+	<% end %>
+</div>

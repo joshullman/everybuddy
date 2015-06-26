@@ -3,16 +3,17 @@ get "/" do
 end
 
 post "/results" do
-  @events = []
-  Event.all.each do |event|
-    event.tags.each do |tag|
-      @events << event if tag.name == params[:tag]
-    end
-  end
-
-  if response.xhr?
-  	erb :"_results", locals: {events: @events}, layout: false
+  p "*************" * 50
+  p params
+  p "*************" * 40
+  @tag = Tag.where(name: params[:tag]).first
+  @events = @tag.events
+  if request.xhr?
+  	p @tag
+  	p @events
+  	content_type :json
+  	(erb :"_results", layout: false, locals: {events: @events, search_tag: @tag}).to_json
   else
-	  erb :results
+	  erb :home
 	end
 end

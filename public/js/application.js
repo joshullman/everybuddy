@@ -5,12 +5,12 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 
-  $('.results_wrapper').remove();
-
 
   $('.search_wrapper').on('submit', function(event) {
     event.preventDefault();
+    $('.results_wrapper').remove();
     var $form = $(event.target);
+
     $.ajax({
       method: $form.attr('method'),
       url: $form.attr('action'),
@@ -19,6 +19,7 @@ $(document).ready(function() {
 
     .done(function (response) {
       $('.search_wrapper').append(response);
+      $('.search_form')[0].reset();
     })
 
     .fail(function (response) {
@@ -54,13 +55,35 @@ $(document).ready(function() {
     })
 
     .done(function (response) {
-      // $('.tag_list').append(response);
+      $('.tag_list').append(response);
     })
 
     .fail(function (response) {
     })
   })
 
+  $('.search_wrapper').on("click", '#new_search' ,function(event){
+    event.preventDefault();
+    $('.results_wrapper').remove();
+    var $form = $(event.target);
+
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.attr('value')
+    })
+
+    .done(function (response) {
+      $('.search_wrapper').append(response);
+      $('.search_form')[0].reset();
+    })
+
+    .fail(function (response) {
+      console.log("i fail");
+      console.log(response)
+    })
+
+  })
 
   // starFun();
 

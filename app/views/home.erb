@@ -1,18 +1,17 @@
 <%= erb :_nav_bar, layout: false %>
 
-<div class="search_wrapper center">
-	<h1>EVERYBUDDY :)</h1>
-	<h3>Cuz everyone's looking for a buddy</h3>
-	<h4><p>What kind of buddy are you looking for?</p>
-	<form action="/results" method="post">
-	  <input type="text" name="tag" placeholder="BUDDY TIME">
-	  <input type="submit" >
-	</form></h4>
-</div>
+<main>
+	<div class="search_wrapper center">
+		<h1>EVERYBUDDY :)</h1>
+		<h3>Cuz everyone's looking for a buddy</h3>
+		<h4><p>What kind of buddy are you looking for?</p>
+		<form class="search_form" action="/results" method="post">
+		  <input type="text" name="tag" placeholder="BUDDY TIME">
+		  <input type="submit" >
+		</form></h4>
+	</div>
 
-<div class="results_wrapper center">
-  <h1>RESULTS:</h1>
-	  <div class="event_list">
-	      <%= erb :"_results", layout: false, locals: {events: @events} %>
-	  </div>
-</div>
+	<% if @events %>
+		<%= erb :"_results", layout: false, locals: {events: @events, search_tag: @tag} %>
+	<% end %>
+</main>
