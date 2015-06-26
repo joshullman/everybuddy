@@ -1,5 +1,5 @@
 #new
-get "/users/new" do
+post "/users/new" do
   erb :"users/new"
 end
 
