@@ -1,6 +1,6 @@
 <%= erb :_nav_bar, layout: false %>
 
-<div class="center">
+<div class="search_wrapper center">
 	<h1>EVERYBUDDY :)</h1>
 	<h3>Cuz everyone's looking for a buddy</h3>
 	<h4><p>What kind of buddy are you looking for?</p>
@@ -10,11 +10,9 @@
 	</form></h4>
 </div>
 
-<div class="result_wrapper center">
+<div class="results_wrapper center">
   <h1>RESULTS:</h1>
 	  <div class="event_list">
-	    <% @events.each do |event| %>
-	      <%= erb :"_results", layout: false, locals: {event: event} %>
-	    <% end %>
+	      <%= erb :"_results", layout: false, locals: {events: @events} %>
 	  </div>
 </div>

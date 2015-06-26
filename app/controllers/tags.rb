@@ -16,9 +16,9 @@ end
 post "/tags" do
   tag = Tag.find_by(name: params[:name]) || tag = Tag.new(name: params[:name])
   tag.save
-  user_tag = UserTag.new(user_id: current_user.id, tag_id: tag.id)
-  if user_tag.save
-    tags = current_user.tags
+  event_tag = EventTag.new(event_id: event.id, tag_id: tag.id)
+  if event_tag.save
+    tags = event.tags
     erb :"tags/_new", locals: {tag: tag}, layout: false
   else
     status 400

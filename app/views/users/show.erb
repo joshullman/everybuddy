@@ -13,14 +13,14 @@
 <% if logged_in? && @user.id != current_user.id && current_user.pending_buddies.include?(@user)%>
   <h3>(Buddy Request Pending...)</h3>
 <% elsif logged_in? && @user.id != current_user.id && !current_user.accepted_buddies.include?(@user)%>
-  <form action="/users/<%=@user.id%>/buddies" method="post">
+  <form action="/users/<%= @user.id %>/buddies" method="post">
     <input type="submit" value="Add Buddy">
   </form>
 <% elsif logged_in? && @user.id == current_user.id %>
 <% elsif !logged_in? %>
 <% else %>
   <h3>Already friends!</h3>
-  <form action="/buddies/<%=@user.id%>" method="post">
+  <form action="/buddies/<%= @user.id %>" method="post">
     <input type="hidden" name="_method" value="delete" />
     <input type="submit" value="Remove Buddy" />
   </form>

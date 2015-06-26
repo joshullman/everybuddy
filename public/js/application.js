@@ -5,6 +5,27 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 
+  $('.results_wrapper').remove();
+
+
+  $('.search_wrapper').on('submit', function(event) {
+    event.preventDefault();
+    var $form = $(event.target);
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
+
+    .done(function (response) {
+      $('.search_wrapper').append(response);
+    })
+
+    .fail(function (response) {
+    })
+  })
+  
+
   $('.new_tag').on('submit', function(event) {
     event.preventDefault();
     var $form = $(event.target);

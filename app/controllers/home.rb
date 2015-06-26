@@ -2,17 +2,17 @@ get "/" do
   erb :home
 end
 
-get "/results" do
-	erb :results
-end
-
 post "/results" do
-  @users = []
-  User.all.each do |user|
-   user.tags.each do |tag|
-     @users << user if tag.name == params[:tag]
-   end
+  @events = []
+  Event.all.each do |event|
+    event.tags.each do |tag|
+      @events << event if tag.name == params[:tag]
+    end
   end
-  p @users
-  erb :results
+
+  if response.xhr?
+  	erb :"_results", locals: {events: @events}, layout: false
+  else
+	  erb :results
+	end
 end
