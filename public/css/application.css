@@ -80,3 +80,9 @@ body {
 .center {
 	text-align: center;
 }
+
+.results_wrapper div.center {
+  border: 1px solid #000000;
+  width: 50%;
+  margin: auto;
+}
