@@ -1,0 +1,13 @@
+
+<div id="<%= tag.id %>" class="center">
+	<form action="/results" method="post">
+	  <input type="submit" name="tag" value="<%= tag.name %>" />
+	</form>
+	<div id="delete_tag">
+		<form action="/tags/<%= tag.id %>" method="post">
+		  <input type="hidden" name="_method" value="delete">
+		  <input type="submit" value="Delete">
+		</form>
+	</div>
+	<br>
+</div>

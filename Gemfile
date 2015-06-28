@@ -17,10 +17,10 @@ gem 'activerecord', '~>4.1'
 gem 'rake'
 
 gem 'shotgun'
+gem 'bcrypt'
 
 group :test do
   gem 'faker'
   gem 'rspec'
 end
 
-gem 'bcrypt'

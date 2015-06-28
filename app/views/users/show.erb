@@ -3,31 +3,7 @@
 <div class="center">
   <h1><%= @user.username %></h1>
   <p><h3><%= @user.name %></h3></p>
-  <p><h3>Tags:</h3></p>
-  <h4>
-    <% tags = [] %>
-    <% @user.tags.each do |tag| %>
-    <% tags << tag.name %>
-    <% end %>
-    <%= tags.join(", ") %>
-  </h4>
 </div>
-
-<!-- <form action="/users/<%= @user.id %>/ratings" method="post">
-  <input name="star1" type="radio" class="star-off"/> 
-  <input name="star2" type="radio" class="star-off"/> 
-  <input name="star3" type="radio" class="star-off"/> 
-  <input name="star4" type="radio" class="star-off"/> 
-  <input name="star5" type="radio" class="star-off"/>
-  <div class="star-off" id="1"></div>
-  <div class="star-off" id="2"></div>
-  <div class="star-off" id="3"></div>
-  <div class="star-off" id="4"></div>
-  <div class="star-off" id="5"></div>
-
-  <input type="submit" value="Rate" />
-
-</form> -->
 
 <% if logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%= @user.id %>/events"><%= @user.username %>'s Events</a></p>
@@ -37,14 +13,14 @@
 <% if logged_in? && @user.id != current_user.id && current_user.pending_buddies.include?(@user)%>
   <h3>(Buddy Request Pending...)</h3>
 <% elsif logged_in? && @user.id != current_user.id && !current_user.accepted_buddies.include?(@user)%>
-  <form action="/users/<%=@user.id%>/buddies" method="post">
+  <form action="/users/<%= @user.id %>/buddies" method="post">
     <input type="submit" value="Add Buddy">
   </form>
 <% elsif logged_in? && @user.id == current_user.id %>
 <% elsif !logged_in? %>
 <% else %>
   <h3>Already friends!</h3>
-  <form action="/buddies/<%=@user.id%>" method="post">
+  <form action="/buddies/<%= @user.id %>" method="post">
     <input type="hidden" name="_method" value="delete" />
     <input type="submit" value="Remove Buddy" />
   </form>

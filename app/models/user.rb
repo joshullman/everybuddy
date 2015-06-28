@@ -7,9 +7,6 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :email, uniqueness: true
 
-  has_many :user_tags
-  has_many :tags, -> {distinct}, through: :user_tags
-
   ###########################################################################
 
   has_many :sent_convos, class_name: "Conversation", source: :user_one, foreign_key: "sender"

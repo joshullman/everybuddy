@@ -72,18 +72,13 @@ Message.create(conversation_id: 4, user_id: 1, content: "Does it?")
 Message.create(conversation_id: 5, user_id: 33, content: "Aren't they just the cutest thing ever?")
 Message.create(conversation_id: 5, user_id: 1, content: "b^_^d")
 
-100.times do
-  a = (1 + rand(33))
-  b = (1 + rand(20))
-  UserTag.create(user_id: a, tag_id: b)
-end
-
 ##############################################
 
 40.times do
 	a = (1 + rand(33))
 	b = (1 + rand(33))
-	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first && !BuddyRelationship.where(user_id: b, buddy_id: a).first
+	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first && 
+							 !BuddyRelationship.where(user_id: b, buddy_id: a).first
 		BuddyRelationship.create(user_id: a, buddy_id: b)
 	end
 end
@@ -91,7 +86,8 @@ end
 80.times do
 	a = (1 + rand(33))
 	b = (1 + rand(33))
-	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first && !BuddyRelationship.where(user_id: b, buddy_id: a).first
+	if a != b && !BuddyRelationship.where(user_id: a, buddy_id: b).first && 
+							 !BuddyRelationship.where(user_id: b, buddy_id: a).first
 		BuddyRelationship.create(user_id: a, buddy_id: b, accepted: true)
 	end
 end
@@ -104,7 +100,15 @@ end
 	c = (rand(2))
 	c == 1 ? c = true : c = false
 	if a != b && !Event.where(poster_id: a, receiver_id: b).first && !Event.where(poster_id: b, receiver_id: a).first
-		Event.create(poster_id: a, receiver_id: b, name: "WANNA HANG OOT?", time: "TOMORROW", location: "DBC", is_private: c)
+		Event.create(
+			poster_id: a, 
+			receiver_id: b, 
+			name: "WANNA HANG OOT?", 
+			description: "FREAKIN SWEET",
+			time: "TOMORROW", 
+			location: "DBC", 
+			is_private: c
+		)
 	end
 end
 
@@ -114,15 +118,34 @@ end
 	c = (rand(2))
 	c == 1 ? c = true : c = false
 	if a != b && !Event.where(poster_id: a, receiver_id: b).first && !Event.where(poster_id: b, receiver_id: a).first
-		Event.create(poster_id: a, receiver_id: b, name: "CONFIRMED HANG SESH BRUH", time: "TOMORROW", location: "DBC", is_private: c, accepted: true)
+		Event.create(
+			poster_id: a, 
+			receiver_id: b, 
+			name: "CONFIRMED HANG SESH BRUH", 
+			description: "AWESOME",
+			time: "TOMORROW", 
+			location: "DBC", 
+			is_private: c, 
+			accepted: true
+		)
 	end
 end
 
 
 40.times do
 	a = (1 + rand(33))
-	Event.create(poster_id: a, name: "I AM SO LONELY", time: "TOMORROW", location: "DBC", is_private: false)
+	Event.create(
+		poster_id: a, 
+		name: "I AM SO LONELY", 
+		description: "PLEASE LOVE ME",
+		time: "TOMORROW", 
+		location: "DBC", 
+		is_private: false
+	)
 end
 
-
-
+100.times do
+  a = (1 + rand(100))
+  b = (1 + rand(20))
+  EventTag.create(event_id: a, tag_id: b)
+end

@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.integer  :poster_id
       t.integer  :receiver_id, default: 0
       t.string   :name
+      t.string   :description
       t.string   :time
       t.string   :location
       t.boolean  :accepted, default: false

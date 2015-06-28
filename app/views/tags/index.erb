@@ -1,18 +1,17 @@
 <%= erb :_nav_bar, layout: false %>
 
-<div class="center">
+<div class="tag_wrapper center">
+  <div class="new_tag center">
+    <form id="tag_form" action="/tags" method="post">
+      <input type="text" name="name" />
+      <input type="submit" value="Add Tag">
+    </form>
+  </div>
   <h3>Your Tags:</h3>
-  <% @tags.each do |tag| %>
-    <p>
-      <form action="/results" method="post">
-        <input type="submit" name="tag" value="<%= tag.name %>" />
-      </form>
-      <form action="/tags/<%= tag.id %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete">
-      </form>
-    </p>
-  <% end %>
-  <p><a href="/tags/new">Add Tags</a></p>
+  <div class="tag_list">
+    <% @tags.each do |tag| %>
+      <%= erb :"tags/_new", layout: false, locals: {tag: tag} %>
+    <% end %>
+  </div>
 </div>
 

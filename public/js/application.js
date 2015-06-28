@@ -5,47 +5,85 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 
-  // $('nav').on('submit', function(event) {
-    
-    
-  // })
 
-  // $('').on('submit', function(event) {
-  //   event.preventDefault();
-  //   var $form = $(event.target);
+  $('.search_wrapper').on('submit', function(event) {
+    event.preventDefault();
+    $('.results_wrapper').remove();
+    var $form = $(event.target);
 
-  //   $.ajax({
-  //     url: $form.attr('action'),
-  //     type: $form.attr('method'),
-  //     data: $form.serialize()
-  //   }).done(function (response){
-  //     $form.closest('li').remove();
-  //   }).fail(function (response) {
-  //     $submit_input.val("Failed, retry?")
-  //   }) 
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
 
-  // })
+    .done(function (response) {
+      $('.search_wrapper').append(response);
+      $('.search_form')[0].reset();
+    })
 
+    .fail(function (response) {
+    })
+  })
+  
 
-  // $('').on('submit', function(event) {
-  //   event.preventDefault();
-  //   var $form = $(event.target);
-  //   var $submit_input = $form.children('input[type=submit]')
+  $('.new_tag').on('submit', function(event) {
+    event.preventDefault();
+    var $form = $(event.target);
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
 
-  //   $submit_input.val("Deleting...");
+    .done(function (response) {
+      $('.tag_list').append(response);
+      $('#tag_form')[0].reset();
+    })
 
-  //   $.ajax({
-  //     url: $form.attr('action'),
-  //     type: 'DELETE'
+    .fail(function (response) {
+    })
+  })
 
-  //   }).done(function (response){
-  //     $form.closest('li').remove();
-  //   }).fail(function (response) {
-  //     $submit_input.val("Failed, retry?")
-  //   }) 
+  $('.tag_wrapper').on('submit', '#delete_tag', function(event) {
+    event.preventDefault();
+    var $form = $(event.target);
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
 
-  // });
+    .done(function (response) {
+      $('.tag_list').append(response);
+    })
 
+    .fail(function (response) {
+    })
+  })
+
+  $('.search_wrapper').on("click", '#new_search' ,function(event){
+    event.preventDefault();
+    $('.results_wrapper').remove();
+    var $form = $(event.target);
+
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.attr('value')
+    })
+
+    .done(function (response) {
+      $('.search_wrapper').append(response);
+      $('.search_form')[0].reset();
+    })
+
+    .fail(function (response) {
+      console.log("i fail");
+      console.log(response)
+    })
+
+  })
 
   // starFun();
 

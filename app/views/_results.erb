@@ -1,0 +1,18 @@
+<div class="results_wrapper center">
+	<h1><%= search_tag.name.upcase %> RESULTS:</h1>
+	<% events.each do |event|%> 
+		<div id="event_post <%= event.id %>" class="center">
+			<h3>Event: <a href="/users/<%= event.poster.id %>/events/<%= event.id %>"><%= event.name %></a></h3>
+			<h4>Poster: <a href="/users/<%= event.poster.id %>"><%= event.poster.username %></a></h4>
+			<h4>Description: <%= event.description %></h4>
+			<h4>Time: <%= event.time %></h4>
+			<h4>Location: <%= event.location %></h4>
+			<h6>Tags: <% event.tags.each do |tag| %>
+				<form id="new_search" action="/results" method="post">
+				  <input type="button" name="tag" value="<%= tag.name %>" >
+				</form>
+			<% end %></h6>
+		</div>
+		<br>
+	<% end %>
+</div>
