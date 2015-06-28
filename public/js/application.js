@@ -6,7 +6,7 @@ $(document).ready(function() {
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 
 
-  $('.search_wrapper').on('submit', function(event) {
+  $('.search_wrapper').on('submit', '.main_search', function(event) {
     event.preventDefault();
     $('.results_wrapper').remove();
     var $form = $(event.target);
@@ -26,6 +26,27 @@ $(document).ready(function() {
     })
   })
   
+  $('.search_wrapper').on('submit', '#new_search', function(event){
+    event.preventDefault();
+    $('.results_wrapper').remove();
+    var $form = $(event.target);
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.children()
+    })
+
+    .done(function (response) {
+      $('.search_wrapper').append(response);
+      $('.search_form')[0].reset();
+    })
+
+    .fail(function (response) {
+      console.log("i fail");
+      console.log(response)
+    })
+
+  })
 
   $('.new_tag').on('submit', function(event) {
     event.preventDefault();
@@ -62,28 +83,6 @@ $(document).ready(function() {
     })
   })
 
-  $('.search_wrapper').on("click", '#new_search' ,function(event){
-    event.preventDefault();
-    $('.results_wrapper').remove();
-    var $form = $(event.target);
-
-    $.ajax({
-      method: $form.attr('method'),
-      url: $form.attr('action'),
-      data: $form.attr('value')
-    })
-
-    .done(function (response) {
-      $('.search_wrapper').append(response);
-      $('.search_form')[0].reset();
-    })
-
-    .fail(function (response) {
-      console.log("i fail");
-      console.log(response)
-    })
-
-  })
 
   // starFun();
 
