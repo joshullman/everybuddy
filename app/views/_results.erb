@@ -9,7 +9,7 @@
 			<h4>Location: <%= event.location %></h4>
 			<h6>Tags: <% event.tags.each do |tag| %>
 				<form id="new_search" action="/results" method="post">
-				  <input type="button" name="tag" value="<%= tag.name %>" >
+				  <input type="submit" name="tag" value="<%= tag.name %>" >
 				</form>
 			<% end %></h6>
 		</div>
