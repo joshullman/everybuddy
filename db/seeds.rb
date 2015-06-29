@@ -69,6 +69,11 @@ Tag.create(name: "dancing")
 Tag.create(name: "clubbing")
 Tag.create(name: "scuba diving")
 Tag.create(name: "beach")
+Tag.create(name: "aquarium")
+Tag.create(name: "zoo")
+Tag.create(name: "go-kart")
+Tag.create(name: "theme park")
+Tag.create(name: "minigolf")
 
 Conversation.create(sender: 1, receiver: 2, title: "Hey")
 Conversation.create(sender: 1, receiver: 33, title: "FRAWGS")
@@ -175,6 +180,6 @@ end
 
 100.times do
   a = (1 + rand(100))
-  b = (1 + rand(35))
+  b = (1 + rand(40))
   EventTag.create(event_id: a, tag_id: b) if !EventTag.where(event_id: a, tag_id: b).first
 end
