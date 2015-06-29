@@ -54,6 +54,21 @@ Tag.create(name: "purgery")
 Tag.create(name: "road trip")
 Tag.create(name: "treason")
 Tag.create(name: "shopping")
+Tag.create(name: "tennis")
+Tag.create(name: "basketball")
+Tag.create(name: "golfing")
+Tag.create(name: "snowboarding")
+Tag.create(name: "fishing")
+Tag.create(name: "coffee")
+Tag.create(name: "museum")
+Tag.create(name: "sporting event")
+Tag.create(name: "workout")
+Tag.create(name: "movie")
+Tag.create(name: "skating")
+Tag.create(name: "dancing")
+Tag.create(name: "clubbing")
+Tag.create(name: "scuba diving")
+Tag.create(name: "beach")
 
 Conversation.create(sender: 1, receiver: 2, title: "Hey")
 Conversation.create(sender: 1, receiver: 33, title: "FRAWGS")
@@ -78,7 +93,7 @@ Message.create(conversation_id: 5, user_id: 1, content: "b^_^d")
 	a = (1 + rand(33))
 	b = (1 + rand(33))
 	Conversation.create(sender: a, receiver: b, title: Faker::Lorem.word) if a != b
-	3.times do
+	5.times do
 		c = Conversation.last.id
 		d = (1 + rand(2))
 		d == 1 ? d = a : d = b
@@ -160,6 +175,6 @@ end
 
 100.times do
   a = (1 + rand(100))
-  b = (1 + rand(20))
+  b = (1 + rand(35))
   EventTag.create(event_id: a, tag_id: b) if !EventTag.where(event_id: a, tag_id: b).first
 end
