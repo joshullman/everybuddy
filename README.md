@@ -30,28 +30,28 @@ As a user:
 **Searching**
 - I want to be able to search for people with common interests
 - I want to be able to refine my search based on criteria
-- I want to be able to contact others through the search
+- ~~I want to be able to contact others through the search~~
 - I want my search to be dynamic
 
 **Profile/Dashboard**
-- I want to see what events I have planned
-- I want to see what events my buddies have planned
+- ~~I want to see what events I have planned~~
+- ~~I want to see what events my buddies have planned~~
 - I want to see what events are recommended for me
 - I want to see what buddies are recommended for me
 
 **Buddies**
 - ~~I want to be able to become buddies with others (friend requests)~~
 - I want to see how well me and a buddy should get along
-- I want to see when other people want to become buddies with me
-- I want to be able to decide if me and another individual should be buddies
+- ~~I want to see when other people want to become buddies with me~~
+- ~~I want to be able to decide if me and another individual should be buddies~~
 - I want buddies to be able to see all of my events
 
 **Messaging**
 - ~~I want to be able to message buddies~~
 - I want to be able to message strangers with ease
 - I dont want to feel shy about messaging someone - the atmosphere must reflect openness
-- I want to be able to see when my messages have been sent
-- I want to be able to see which conversations I have with other individuals
+- ~~I want to be able to see when my messages have been sent~~
+- ~~I want to be able to see which conversations I have with other individuals~~
 - I want to be able to see which messages have been seen
 
 **Rating System**

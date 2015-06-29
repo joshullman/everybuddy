@@ -52,6 +52,7 @@
           <form action="/events/<%= event.id %>/accept" method="post">
             <input type="submit" value="Count Me In!">
           </form>
+        <h4><a href="/users/<%= event.poster.id %>/conversations/new">New Message</a></h4>
         <% end %>
         <h6>Tags: <% event.tags.each do |tag| %>
           <form id="new_search" action="/results" method="post">
