@@ -5,8 +5,9 @@
   <p><h3><%= @user.name %></h3></p>
 </div>
 
-<h2>Your Events:</h2>
 <% if logged_in? && @user.id == current_user.id %>
+<p><a href="/events/new">New Event</a></p>
+<h2>Your Events:</h2>
   <h3>Upcoming Events:</h3>
   <% current_user.accepted_events.each do |event| %>
     <div id="event_post <%= event.id %>" class="center">
@@ -40,6 +41,7 @@
   <h3>Your Friend's Events:</h3>
   <% current_user.buddies.each do |buddy| %>
     <% buddy.events.each do |event| %>
+    <% if event.receiver_id == 0 || event.accepted == true %>
       <div id="event_post <%= event.id %>" class="center">
         <h3>Event: <a href="/users/<%= event.poster.id %>/events/<%= event.id %>"><%= event.name %></a></h3>
         <h4>Poster: <a href="/users/<%= event.poster.id %>"><%= event.poster.username %></a></h4>
@@ -57,6 +59,7 @@
           </form>
         <% end %></h6>
       </div>
+    <% end %>
     <% end %>
   <% end %>
   <h3>Events Recommended for You:</h3>

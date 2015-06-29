@@ -1,3 +1,5 @@
+require 'faker'
+
 User.create(name: "Josh Ullman", gender: "M", email: "a@aol.com", username: "CaptainPlanet", password: "password")
 User.create(name: "Alex Cusack", gender: "M", email: "b@aol.com", username: "Kuzy", password: "password")
 User.create(name: "David Grotting", gender: "M", email: "c@aol.com", username: "BuffaloKing", password: "password")
@@ -71,6 +73,18 @@ Message.create(conversation_id: 4, user_id: 2, content: "let's see if this works
 Message.create(conversation_id: 4, user_id: 1, content: "Does it?")
 Message.create(conversation_id: 5, user_id: 33, content: "Aren't they just the cutest thing ever?")
 Message.create(conversation_id: 5, user_id: 1, content: "b^_^d")
+
+40.times do
+	a = (1 + rand(33))
+	b = (1 + rand(33))
+	Conversation.create(sender: a, receiver: b, title: Faker::Lorem.word) if a != b
+	3.times do
+		c = Conversation.last.id
+		d = (1 + rand(2))
+		d == 1 ? d = a : d = b
+		Message.create(conversation_id: c, user_id: d, content: Faker::Lorem.sentence) if a != b
+	end
+end
 
 ##############################################
 
