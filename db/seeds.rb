@@ -112,7 +112,7 @@ end
 	end
 end
 
-40.times do
+20.times do
 	a = (1 + rand(33))
 	b = (1 + rand(33))
 	c = (rand(2))
@@ -132,7 +132,7 @@ end
 end
 
 
-40.times do
+60.times do
 	a = (1 + rand(33))
 	Event.create(
 		poster_id: a, 

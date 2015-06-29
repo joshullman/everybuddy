@@ -5,6 +5,42 @@
   <p><h3><%= @user.name %></h3></p>
 </div>
 
+<h2>Your Events:</h2>
+<% if logged_in? && @user.id == current_user.id %>
+  <h3>Upcoming Events:</h3>
+  <% current_user.accepted_events.each do |event| %>
+    <div id="event_post <%= event.id %>" class="center">
+      <h3>Event: <a href="/users/<%= event.poster.id %>/events/<%= event.id %>"><%= event.name %></a></h3>
+      <h4>Poster: <a href="/users/<%= event.poster.id %>"><%= event.poster.username %></a></h4>
+      <h4>Description: <%= event.description %></h4>
+      <h4>Time: <%= event.time %></h4>
+      <h4>Location: <%= event.location %></h4>
+      <h6>Tags: <% event.tags.each do |tag| %>
+        <form id="new_search" action="/results" method="post">
+          <input type="submit" name="tag" value="<%= tag.name %>" >
+        </form>
+      <% end %></h6>
+    </div>
+  <% end %>
+  <h3>Posted Events:</h3>
+  <% current_user.solo_events.each do |event| %>
+    <div id="event_post <%= event.id %>" class="center">
+      <h3>Event: <a href="/users/<%= event.poster.id %>/events/<%= event.id %>"><%= event.name %></a></h3>
+      <h4>Poster: <a href="/users/<%= event.poster.id %>"><%= event.poster.username %></a></h4>
+      <h4>Description: <%= event.description %></h4>
+      <h4>Time: <%= event.time %></h4>
+      <h4>Location: <%= event.location %></h4>
+      <h6>Tags: <% event.tags.each do |tag| %>
+        <form id="new_search" action="/results" method="post">
+          <input type="submit" name="tag" value="<%= tag.name %>" >
+        </form>
+      <% end %></h6>
+    </div>
+  <% end %>
+  <h3>Events That Might Interest You:</h3>
+  
+<% end %>
+
 <% if logged_in? && @user.id != current_user.id %>
   <p><a href="/users/<%= @user.id %>/events"><%= @user.username %>'s Events</a></p>
   <p><a href="/users/<%= @user.id%>/conversations/new">New Message</a></p>
