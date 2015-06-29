@@ -7,6 +7,9 @@
 			<h4>Description: <%= event.description %></h4>
 			<h4>Time: <%= event.time %></h4>
 			<h4>Location: <%= event.location %></h4>
+			<form action="/events/<%= event.id %>/accept" method="post">
+	    	<input type="submit" value="Count Me In!">
+	  	</form>
 			<h6>Tags: <% event.tags.each do |tag| %>
 				<form id="new_search" action="/results" method="post">
 				  <input type="submit" name="tag" value="<%= tag.name %>" >
