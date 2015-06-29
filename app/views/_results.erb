@@ -8,7 +8,6 @@
 				<h4>Description: <%= event.description %></h4>
 				<h4>Time: <%= event.time %></h4>
 				<h4>Location: <%= event.location %></h4>
-				<h4><a href="/users/<%= event.poster.id %>/conversations/new">New Message</a></h4>
 				<form action="/events/<%= event.id %>/accept" method="post">
 		    	<input type="submit" value="Count Me In!">
 		  	</form>
@@ -17,6 +16,7 @@
 					  <input type="submit" name="tag" value="<%= tag.name %>" >
 					</form>
 				<% end %></h6>
+				<h4><a href="/users/<%= event.poster.id %>/conversations/new">New Message</a></h4>
 			</div>
 		<% end %>
 		<br>

@@ -83,29 +83,25 @@ $(document).ready(function() {
     })
   })
 
+  $('.show_message_form').on('click', function(event) {
+    event.preventDefault();
+    var $button = $(event.target);
 
-  // starFun();
+    $.ajax({
+      url: $button.attr('href'),
+      data: {event: $button.attr('value')}
+    })
+
+    .done(function (response) {
+      var results = response.match(/\d+/g);
+      var num = results[1]
+    debugger
+      $("#event_post" + num).append(response);
+    })
+
+    .fail(function (response) {
+    })
+  })
+
 
 });
-
-// var starFun = function() {  
-
-// 		$(".star-off").on("click", function(event){
-
-//     	// var url = $(this).attr("href");
-
-//     event.preventDefault();
-
-//      $.ajax({
-//         type: "get",
-//         url:url,
-//         dataType: "json"
-//       })
-
-//       .done(function(response){
-//         $(".star-off").removeClass();
-//         $(".star-on").addClass();
-
-//       })
-//     }
-//   };

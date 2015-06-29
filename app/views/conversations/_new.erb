@@ -1,0 +1,12 @@
+<div class="message_wrapper center">
+	<form class="new_message" action="/users/<%= user.id %>/conversations" method="post">
+		<input type="hidden" value="<%= event %>">
+	  <label for="conversation">Title:</label>
+	  <input type="text" name="title" value="<%= convo.title %>"/>
+	  <br>
+	  <label for="message">Message:</label>
+	  <input type="text" name="content" value="<%= message.content %>"/>
+	  <br>
+	  <input type="submit" value="Send">
+	</form>
+</div>

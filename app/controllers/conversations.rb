@@ -6,11 +6,20 @@ end
 
 #new
 get	"/users/:user_id/conversations/new" do
+	p "*" * 50
+	p params
+	p "*" * 50
 	@user = User.find(params[:user_id])
-	@records = current_user.conversations_with(params[:user_id])
   @conversation = Conversation.new
   @message = Message.new
-  erb :"conversations/new"
+  erb :"conversations/_new", 
+  		layout: false, 
+  		locals: {
+  			user: @user, 
+  			convo: @conversation, 
+  			message: @message, 
+  			event: params[:event]
+  		}
 end
 
 #create
