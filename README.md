@@ -76,6 +76,4 @@ As a user:
 - I want to be able to see what hangouts are happening around me based on location
 - I want to be able to search for hangouts that are happening in certain area
 
-
-
 ## Features

@@ -147,5 +147,5 @@ end
 100.times do
   a = (1 + rand(100))
   b = (1 + rand(20))
-  EventTag.create(event_id: a, tag_id: b)
+  EventTag.create(event_id: a, tag_id: b) if !EventTag.where(event_id: a, tag_id: b).first
 end
