@@ -98,6 +98,7 @@ class User < ActiveRecord::Base
   end
 
   ##########################################################################
+  
   def password
     @password ||= Password.new(password_hash)
   end
