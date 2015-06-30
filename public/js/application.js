@@ -95,8 +95,26 @@ $(document).ready(function() {
     .done(function (response) {
       var results = response.match(/\d+/g);
       var num = results[1]
-    debugger
       $("#event_post" + num).append(response);
+    })
+
+    .fail(function (response) {
+    })
+  })
+
+  $('.event_wrapper').on('submit', '.new_message', function(event) {
+    event.preventDefault();
+    var $form = $(event.target);
+
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
+
+    .done(function (response) {
+      $('.message_wrapper').remove();
+      
     })
 
     .fail(function (response) {

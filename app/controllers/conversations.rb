@@ -6,9 +6,6 @@ end
 
 #new
 get	"/users/:user_id/conversations/new" do
-	p "*" * 50
-	p params
-	p "*" * 50
 	@user = User.find(params[:user_id])
   @conversation = Conversation.new
   @message = Message.new
@@ -24,9 +21,17 @@ end
 
 #create
 post	"/users/:user_id/conversations" do
-	@conversation = Conversation.new(sender: current_user.id, receiver: params[:user_id], title: params[:title])
+	@conversation = Conversation.new(
+		sender: current_user.id, 
+		receiver: params[:user_id], 
+		title: params[:title]
+		)
 	if @conversation.save
-		@message = Message.new(conversation_id: @conversation.id, user_id: current_user.id, content: params[:content])
+		@message = Message.new(
+			conversation_id: @conversation.id, 
+			user_id: current_user.id, 
+			content: params[:content]
+			)
 	else
 		status 400
     erb :"conversations/new"
@@ -62,7 +67,11 @@ delete "/conversations/:conversation_id" do
 end
 
 post	"/conversations/:conversation_id/message" do
-	@message = Message.new(conversation_id: params[:conversation_id], user_id: current_user.id, content: params[:content])
+	@message = Message.new(
+		conversation_id: params[:conversation_id], 
+		user_id: current_user.id, 
+		content: params[:content]
+		)
   if @message.save
     redirect "conversations/#{@message.conversation_id}"
   else
