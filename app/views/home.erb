@@ -11,6 +11,8 @@
 		</form></h4>
 	</div>
 
+	<div id="map-canvas"></div>
+
 	<% if @events %>
 		<%= erb :"_results", layout: false, locals: {events: @events, search_tag: @tag} %>
 	<% end %>

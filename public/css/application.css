@@ -86,3 +86,8 @@ body {
   width: 50%;
   margin: auto;
 }
+
+#map-canvas { 
+  width: 50%;
+  height: 50% 
+}

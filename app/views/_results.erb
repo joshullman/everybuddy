@@ -2,7 +2,7 @@
 	<h1><%= search_tag.name.upcase %> RESULTS:</h1>
 	<% events.each do |event|%> 
 		<% if event.poster.id != current_user.id %>
-			<div id="event_post <%= event.id %>" class="center">
+			<div id="event_post<%= event.id %>" class="center">
 				<h3>Event: <a href="/users/<%= event.poster.id %>/events/<%= event.id %>"><%= event.name %></a></h3>
 				<h4>Poster: <a href="/users/<%= event.poster.id %>"><%= event.poster.username %></a></h4>
 				<h4>Description: <%= event.description %></h4>
@@ -16,7 +16,10 @@
 					  <input type="submit" name="tag" value="<%= tag.name %>" >
 					</form>
 				<% end %></h6>
-				<h4><a href="/users/<%= event.poster.id %>/conversations/new">New Message</a></h4>
+				<h4><a class="show_message_form" value="<%= event.id %>" href="/users/<%= event.poster.id %>/conversations/new">New Message</a></h4>
+	        <% if @conversation %>
+	          <%= erb :"conversations/_new", layout: false, locals: {user: @user, convo: @conversation, message: @message, event: event} %>
+	        <% end %>
 			</div>
 		<% end %>
 		<br>

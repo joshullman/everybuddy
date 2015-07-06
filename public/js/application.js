@@ -48,6 +48,9 @@ $(document).ready(function() {
 
   })
 
+
+
+
   $('.new_tag').on('submit', function(event) {
     event.preventDefault();
     var $form = $(event.target);
@@ -82,6 +85,9 @@ $(document).ready(function() {
     .fail(function (response) {
     })
   })
+
+
+
 
   $('.show_message_form').on('click', function(event) {
     event.preventDefault();
@@ -121,5 +127,65 @@ $(document).ready(function() {
     })
   })
 
+
+
+
+  $('.search_wrapper').on('click', '.show_message_form', function(event) {
+    event.preventDefault();
+    var $button = $(event.target);
+
+    $.ajax({
+      url: $button.attr('href'),
+      data: {event: $button.attr('value')}
+    })
+
+    .done(function (response) {
+      var results = response.match(/\d+/g);
+      var num = results[1]
+      $("#event_post" + num).append(response);
+    })
+
+    .fail(function (response) {
+    })
+  })
+
+  $('.search_wrapper').on('submit', '.new_message', function(event) {
+    event.preventDefault();
+    var $form = $(event.target);
+
+    $.ajax({
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
+
+    .done(function (response) {
+      $('.message_wrapper').remove();
+      
+    })
+
+    .fail(function (response) {
+    })
+  })
+
+  // function initialize() {
+  // var mapOptions = {
+  //   zoom: 8,
+  //   center: new google.maps.LatLng(-34.397, 150.644)
+  // };
+
+  // var map = new google.maps.Map(document.getElementById('map-canvas'),
+  //     mapOptions);
+  // }
+
+  // function loadScript() {
+  //   var script = document.createElement('script');
+  //   script.type = 'text/javascript';
+  //   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+  //       '&signed_in=true&callback=initialize';
+  //   document.body.appendChild(script);
+  // }
+
+  // window.onload = loadScript;
 
 });
